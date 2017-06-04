@@ -30,7 +30,6 @@ class Tren:
     def llegar(self):
         pass
 
-
 """class Nodo:
     def __init__(self, next=None, prev=None, valor=None):
         self.next = next
