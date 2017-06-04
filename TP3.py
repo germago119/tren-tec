@@ -1,5 +1,7 @@
 import os
 
+#ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
+#TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
 
 class Tren:
     def __init__(self, tren, ruta, hora, maquina, vagones):
@@ -29,7 +31,6 @@ class Tren:
 
     def llegar(self):
         pass
-
 
 """class Nodo:
     def __init__(self, next=None, prev=None, valor=None):
