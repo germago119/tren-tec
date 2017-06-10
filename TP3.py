@@ -5,17 +5,33 @@ import os
 
 f = open('estacion.txt')
 
+class Maquina:
+    def __init__(self, num_maquina, capacidad_v):
+        self.num_maquina = num_maquina
+        self.capacidad_v = capacidad_v
 
 class Tren:
-    def __init__(self, tren, ruta, hora, maquina):
+    def __init__(self, tren, ruta, hora, num):
         self.num_tren = tren
         self.ruta = ruta
         self.hora = hora
-        self.num_maquina = maquina
+        self.num_maquina = num
         self.vagones = 0
         self.head = None
         self.tail = None
 
+    def printL(self):
+        nodo = self.head
+        res = "["
+        while nodo != None:
+            if nodo.next != None:
+                res += str(nodo.valor()) + ","
+                nodo = nodo.next
+            else:
+                res += str(nodo.valor())
+                nodo = nodo.next
+        res += "]"
+        print(res)
 
     def enganchar_i(self, num):
         self.vagones += 1
@@ -38,56 +54,47 @@ class Tren:
 
 
     def enganchar_m(self, num):
-        def insert(self, valor, pos):
-            if not pos <= self.largo:
-                return print("Error")
+            if self.vagones == 0:
+                return self.enganchar_i(num)
             temp = self.head
+            medio = self.vagones//2
             i = 1
-            if pos == 0:
-                self.head = Vagon(num_vagon=num, next=temp)
-                temp.prev = self.head
-                self.vagones += 1
-                return
             while temp != None:
-                if i != pos:
+                if i != medio:
                     temp = temp.next
                     i += 1
                 else:
-                    temp2 = Nodo(temp, temp.prev, valor)
+                    temp2 = Vagon(next=temp, prev=temp.prev, num_vagon=num)
                     temp.prev.next = temp2
                     temp.prev = temp2
                     self.vagones += 1
                     break
 
     def remove(self, valor):
-        def _del_(self, valor):
             temp = self.head
-            if self.largo == 0:
+            if self.vagones == 0:
                 return print("La Lista esta vacia")
-            if temp.num == valor:
+            if temp.valor() == valor:
                 self.head = temp.next
                 return
             while temp.next != None:
-                if temp.next.num == valor:
+                if temp.next.valor() == valor:
                     temp.next = temp.next.next
                     break
                 temp = temp.next
             self.vagones -=1
             return
 
-    def exit(self):
-        self.__del__()
+    #def exit(self):
+        #self._del_()
 
-    def llegar(self):
+    #def llegar(self):
         #Lee documento de Config
-       self.__init__(tren, ruta, hora, maquina, vagones)
+       #self.__init__(tren, ruta, hora, maquina, vagones)
 
 
 
-class Maquina:
-    def __init__(self, num, capacidad_v):
-        self.num_maquina = num
-        self.capacidad_v = capacidad_v
+
 
 
 class Vagon:
@@ -96,6 +103,9 @@ class Vagon:
         self.next = next
         self.prev = prev
         self.capacidad_p = capacidad_p
+
+    def valor(self):
+        return self.num_vagon
 
 
 """class Nodo:
@@ -198,3 +208,14 @@ class ListaDoble:
                 self.largo += 1
                 break
         return"""
+
+x = Tren("thomas","s-c", 13, 2)
+x.enganchar_i(6)
+x.enganchar_f(5)
+x.enganchar_f(9)
+x.enganchar_f(1)
+x.enganchar_f(7)
+#x.enganchar_m(2)
+x.printL()
+x.remove(6)
+x.printL()
