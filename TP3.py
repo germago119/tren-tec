@@ -3,34 +3,100 @@ import os
 #ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
 #TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
 
+f = open('estacion.txt')
+
+
 class Tren:
-    def __init__(self, tren, ruta, hora, maquina, vagones):
+    def __init__(self, tren, ruta, hora, maquina):
         self.num_tren = tren
         self.ruta = ruta
         self.hora = hora
         self.num_maquina = maquina
-        self.vagones = vagones
+        self.vagones = 0
         self.head = None
         self.tail = None
-        self.lenght = 0
 
-    def engancahar_i(self):
-        pass
 
-    def enganchar_f(self):
-        pass
+    def enganchar_i(self, num):
+        self.vagones += 1
+        if self.head == None and self.tail == None: #Cuando no hay vagones enganchados
+            self.head = Vagon(num_vagon=num)
+            self.tail = self.head
+        else:
+            self.head = Vagon(num_vagon=num)
+            self.tail = self.tail.next
 
-    def enganchar_m(self):
-        pass
 
-    def remove(self):
-        pass
+
+    def enganchar_f(self, num):
+        self.vagones += 1
+        temp = self.tail
+        temp.next = Vagon(num_vagon=num)
+        x = temp.next
+        self.tail = x
+        x.prev = temp
+
+
+    def enganchar_m(self, num):
+        def insert(self, valor, pos):
+            if not pos <= self.largo:
+                return print("Error")
+            temp = self.head
+            i = 1
+            if pos == 0:
+                self.head = Vagon(num_vagon=num, next=temp)
+                temp.prev = self.head
+                self.vagones += 1
+                return
+            while temp != None:
+                if i != pos:
+                    temp = temp.next
+                    i += 1
+                else:
+                    temp2 = Nodo(temp, temp.prev, valor)
+                    temp.prev.next = temp2
+                    temp.prev = temp2
+                    self.vagones += 1
+                    break
+
+    def remove(self, valor):
+        def _del_(self, valor):
+            temp = self.head
+            if self.largo == 0:
+                return print("La Lista esta vacia")
+            if temp.num == valor:
+                self.head = temp.next
+                return
+            while temp.next != None:
+                if temp.next.num == valor:
+                    temp.next = temp.next.next
+                    break
+                temp = temp.next
+            self.vagones -=1
+            return
 
     def exit(self):
-        pass
+        self.__del__()
 
     def llegar(self):
-        pass
+        #Lee documento de Config
+       self.__init__(tren, ruta, hora, maquina, vagones)
+
+
+
+class Maquina:
+    def __init__(self, num, capacidad_v):
+        self.num_maquina = num
+        self.capacidad_v = capacidad_v
+
+
+class Vagon:
+    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None):
+        self.num_vagon = num_vagon
+        self.next = next
+        self.prev = prev
+        self.capacidad_p = capacidad_p
+
 
 """class Nodo:
     def __init__(self, next=None, prev=None, valor=None):
@@ -132,17 +198,3 @@ class ListaDoble:
                 self.largo += 1
                 break
         return"""
-
-
-class Maquina:
-    def __init__(self, num, capacidad_v):
-        self.num_maquina = num
-        self.capacidad_v = capacidad_v
-
-
-class Vagon:
-    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None):
-        self.num_vagon = num_vagon
-        self.next = next
-        self.prev = prev
-        self.capacidad_p = capacidad_p
