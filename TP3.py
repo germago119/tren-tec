@@ -57,7 +57,7 @@ class Tren:
             if self.vagones == 0:
                 return self.enganchar_i(num)
             temp = self.head
-            medio = self.vagones//2
+            medio = self.vagones//2 + 1
             i = 1
             while temp != None:
                 if i != medio:
@@ -91,9 +91,6 @@ class Tren:
     #def llegar(self):
         #Lee documento de Config
        #self.__init__(tren, ruta, hora, maquina, vagones)
-
-
-
 
 
 
@@ -211,11 +208,10 @@ class ListaDoble:
 
 x = Tren("thomas","s-c", 13, 2)
 x.enganchar_i(6)
-x.enganchar_f(5)
-x.enganchar_f(9)
-x.enganchar_f(1)
+#x.enganchar_f(5)
+#x.enganchar_f(9)
+#x.enganchar_f(1)
 x.enganchar_f(7)
-#x.enganchar_m(2)
 x.printL()
-x.remove(6)
+x.enganchar_m(2)
 x.printL()
