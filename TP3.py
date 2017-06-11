@@ -1,7 +1,12 @@
 import os
+import time
+import random
+import csv
 
 #ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
 #TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
+
+random.seed() #Mejora la variabilidad del random
 
 f = open('estacion.txt')
 
