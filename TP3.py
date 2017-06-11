@@ -14,6 +14,7 @@ with open('test.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
         print(row[0],row[1],row[2])
+
 class Maquina:
     def __init__(self, num_maquina, capacidad_v):
         self.num_maquina = num_maquina
