@@ -105,15 +105,48 @@ class Tren:
 
 
 class Vagon:
-    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None):
+    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None, estado = 0):#Estado = 0 si el vagon esta desocupado, si es 1 el vagon esta ocupado
         self.num_vagon = num_vagon
         self.next = next
         self.prev = prev
         self.capacidad_p = capacidad_p
+        self.estado  = estado
+
 
     def valor(self):
         return self.num_vagon
 
+
+
+#Lee el archivo con la info de los trenes
+vagones = []
+with open('vagones_prueba.csv', 'r') as archivo:
+    lista = archivo.read().splitlines()
+    lista.pop(0)
+    for l in lista:
+        linea = l.split(";")
+        if linea[3] == '0':
+            vagones.append(linea[2])
+            print("hola")
+
+
+def auto(cantidad): #Función para los vagones automaticos
+    temp = vagones
+    indice = 0
+    conta = 0
+    while conta <= cantidad:
+        if temp == []:
+            return "Cantidad de vagones insuficientes"
+            break
+        elif str(temp[0]) < str(cantidad):
+            Tren.self.enganchar_f(indice)
+            conta += cantidad
+            printt('si entro al ciclo')
+        else:
+            break
+
+
+auto(50)
 
 """class Nodo:
     def __init__(self, next=None, prev=None, valor=None):
