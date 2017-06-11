@@ -1,10 +1,19 @@
 import os
+import time
+import random
+import csv
 
 #ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
 #TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
 
-f = open('estacion.txt')
+random.seed() #Mejora la variabilidad del random
 
+# f = open('estacion.txt')
+
+with open('test.csv') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    for row in readCSV:
+        print(row[0],row[1],row[2])
 class Maquina:
     def __init__(self, num_maquina, capacidad_v):
         self.num_maquina = num_maquina
