@@ -136,12 +136,12 @@ def auto(cantidad): #Función para los vagones automaticos
     conta = 0
     while conta <= cantidad:
         if temp == []:
-            return "Cantidad de vagones insuficientes"
+            print("Cantidad de vagones insuficientes")
             break
         elif str(temp[0]) < str(cantidad):
             Tren.self.enganchar_f(indice)
             conta += cantidad
-            printt('si entro al ciclo')
+            print('si entro al ciclo')
         else:
             break
 
