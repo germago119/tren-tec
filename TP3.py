@@ -251,9 +251,9 @@ class ListaDoble:
 
 x = Tren("thomas","s-c", 13, 2)
 x.enganchar_i(6)
-#x.enganchar_f(5)
-#x.enganchar_f(9)
-#x.enganchar_f(1)
+x.enganchar_f(5)
+x.enganchar_f(9)
+x.enganchar_f(1)
 x.enganchar_f(7)
 x.printL()
 x.enganchar_m(2)
