@@ -24,11 +24,19 @@ tec.place(x=1100, y=200)
 
 frame_rail = cargarImagen("rail.png")
 rail = Label(contenedor_principal, bg='white', image=frame_rail)
-rail.place(x=300, y=300)
+rail.place(x=290, y=460)
 
-gam_frame = cargarImagen("gam.png")
+gam_frame = cargarImagen("gam2.png")
 gam = Label(contenedor_principal, bg='white', image=gam_frame)
-gam.place(x=300, y=150)
+gam.place(x=300, y=190)
 
+canvas = Canvas(ventana_principal, width=300, height=700, bg='red')
+canvas.place(x=0, y=0)
+
+canvas_v = Canvas(ventana_principal, width=300, height=300, bg='green')
+canvas_v.place(x=0, y=700)
+
+consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
+consola.place(x=300, y=700)
 
 ventana_principal.mainloop()
