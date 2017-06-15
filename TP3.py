@@ -2,6 +2,9 @@ import os
 import time
 import random
 import csv
+from tkinter import *
+from threading import Thread
+
 
 #ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
 #TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
@@ -9,11 +12,55 @@ import csv
 random.seed() #Mejora la variabilidad del random
 
 # f = open('estacion.txt')
+A_TEC = ""
+SJ_TEC = ""
+TEC_SJ = ""
+TEC_A = ""
 
-with open('test.csv') as csvfile:
-    readCSV = csv.reader(csvfile, delimiter=',')
-    for row in readCSV:
-        print(row[0],row[1],row[2])
+
+#               ____________________________
+#______________/
+#Lee y asigna las horas de salida de las rutas
+rutas = []
+with open('rutas.csv', 'r') as archivo:
+    lista = archivo.read().splitlines()
+    lista.pop(0)
+    for l in lista:
+        linea = l.split(";")
+        rutas.append(linea[2])
+
+# Asigna la hora a las rutas
+A_TEC = rutas[0]
+SJ_TEC = rutas[1]
+TEC_SJ = rutas[2]
+TEC_A = rutas[3]
+
+#                __________________________
+#_______________/
+# Lee los trenes que tiene el estado disponible
+vagones = []
+with open('vagones_prueba.csv', 'r') as archivo:
+    lista = archivo.read().splitlines()
+    lista.pop(0)
+    for l in lista:
+        linea = l.split(";")
+        if linea[3] == '0':
+            vagones.append(linea[2])
+
+#Asigna la hora a las rutas
+A_TEC= rutas[0]
+SJ_TEC = rutas[1]
+TEC_SJ = rutas[2]
+TEC_A = rutas[3]
+
+
+
+
+
+
+
+#                ______________________
+#_______________/
 
 class Maquina:
     def __init__(self, num_maquina, capacidad_v):
@@ -117,19 +164,15 @@ class Vagon:
         return self.num_vagon
 
 
-
-#Lee el archivo con la info de los trenes
-vagones = []
-with open('vagones_prueba.csv', 'r') as archivo:
-    lista = archivo.read().splitlines()
-    lista.pop(0)
-    for l in lista:
-        linea = l.split(";")
-        if linea[3] == '0':
-            vagones.append(linea[2])
-            print("hola")
+#           _____________
+#__________/ Función con el numero aleatorio de pasajeros
+def random_pasajeros():
+    pasa = (random.randrange(101))
+    return pasa
 
 
+#                 ______________________________
+#________________/Funcion que ejecuta lo automatico(No terminada)
 def auto(cantidad): #Función para los vagones automaticos
     temp = vagones
     indice = 0
@@ -146,7 +189,61 @@ def auto(cantidad): #Función para los vagones automaticos
             break
 
 
-auto(50)
+
+#                __________________
+#______________/Parte de Interfaz
+def cargarImagen(nombre):#Función para cargar las imágenes
+    ruta = os.path.join('Imagenes', nombre)
+    imagen = PhotoImage(file=ruta)
+    return imagen
+
+root = Tk()
+root.title("Estacion de Tren del TEC")
+root.minsize(1100, 900)
+canvas_fondo = Canvas(root, width = 1100, height = 900, bg = "#000000" )
+canvas_fondo.place(x=0, y = 0)
+
+
+fondo = cargarImagen("estacion.png")
+lbl_fondo = Label(canvas_fondo, bg='white')
+lbl_fondo.config(image=fondo)
+lbl_fondo.place(x=0, y=0)
+
+lbl_rutas= Label(root, text = "Rutas Disponibles", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
+lbl_rutas.pack()
+lbl_rutas.place(x= 825, y = 150)
+lbl_a_tec = Label(root, text = "Alajuela-TEC", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
+lbl_a_tec.pack()
+lbl_a_tec.place(x= 825, y = 200)
+lbl_sj_tec = Label(root, text = "San Jose-TEC", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
+lbl_sj_tec.pack()
+lbl_sj_tec.place(x= 825, y = 250)
+lbl_tec_a = Label(root, text = "TEC-Alajuela", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
+lbl_tec_a.pack()
+lbl_tec_a.place(x= 825, y = 300)
+lbl_tec_sj = Label(root, text = "TEC-San Jose", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
+lbl_tec_sj.pack()
+lbl_tec_sj.place(x= 825, y = 350)
+
+#               _________________________
+#______________/Animacion del Reloj
+clock = Label(root, font=('Consolas', 40), bg="Black", fg="green")
+clock.pack()
+clock.place (x=800, y=70)
+time1 = ""
+def reloj ():
+    global time1
+    time2 = time.strftime ('%H:%M:%S')
+    if time2 != time1:
+        time1 = time2
+        clock.configure (text=time2)
+    clock.after(500,reloj)
+
+a = Thread(target = reloj, args = ())
+a.start()
+#-----------------------------------------------#
+
+
 
 """class Nodo:
     def __init__(self, next=None, prev=None, valor=None):
@@ -258,3 +355,4 @@ x.enganchar_f(7)
 x.printL()
 x.enganchar_m(2)
 x.printL()
+root.mainloop()
