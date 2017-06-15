@@ -137,6 +137,26 @@ class Tren:
             self.vagones -=1
             return
 
+    #                 ______________________________
+    # ________________/Funcion que ejecuta lo automatico(No terminada)
+    def auto(self, cantidad):  # Función para los vagones automaticos
+        temp = vagones
+        indice = 0
+        conta = 0
+        prueba = []
+        while conta <= cantidad:
+            if temp == []:
+                print("Cantidad de vagones insuficientes")
+                break
+            elif str(temp[0]) < str(cantidad):
+                self.enganchar_f(indice)
+                prueba += [temp[indice]]
+                conta += int(temp[indice])
+                print('si entro al ciclo')
+            else:
+                break
+        print(prueba)
+
     #def exit(self):
         #self._del_()
 
@@ -162,30 +182,8 @@ class Vagon:
 #           _____________
 #__________/ Función con el numero aleatorio de pasajeros
 def random_pasajeros():
-    pasa = (random.randrange(101))
+    pasa = (random.randrange(0, 101))
     return pasa
-
-
-#                 ______________________________
-#________________/Funcion que ejecuta lo automatico(No terminada)
-def auto(cantidad): #Función para los vagones automaticos
-    temp = vagones
-    indice = 0
-    conta = 0
-    prueba = []
-    while conta <= cantidad:
-        if temp == []:
-            print("Cantidad de vagones insuficientes")
-            break
-        elif str(temp[0]) < str(cantidad):
-            #Tren.self.enganchar_f(indice)
-            prueba += [temp[indice]]
-            conta += int(temp[indice])
-            print('si entro al ciclo')
-        else:
-            break
-    print(prueba)
-
 
 
 
@@ -243,108 +241,6 @@ a.start()
 #-----------------------------------------------#
 
 
-
-"""class Nodo:
-    def __init__(self, next=None, prev=None, valor=None):
-        self.next = next
-        self.prev = prev
-        self.valor = valor
-
-    def __str__(self):
-        return self.valor
-
-class ListaDoble:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-        self.largo = 0
-
-    def printL(self):
-        nodo = self.head
-        res = "["
-        while nodo != None:
-            if nodo.next != None:
-                res += str(nodo.__str__()) + ","
-                nodo = nodo.next
-            else:
-                res += str(nodo.__str__())
-                nodo = nodo.next
-        res += "]"
-        print(res)
-
-    def rprintL(self):
-        nodo = self.tail
-        res = "["
-        while nodo != None:
-            if nodo.prev != None:
-                res += str(nodo.__str__()) + ","
-                nodo = nodo.prev
-            else:
-                res += str(nodo.__str__())
-                nodo = nodo.prev
-        res += "]"
-        print(res)
-
-    def appe(self, value):
-        self.largo += 1
-        if self.head == None and self.tail == None:  # lista vacia.
-            self.head = Nodo(valor=value)
-            self.tail = self.head
-        else:
-            temp = self.tail
-            temp.next = Nodo(valor=value)
-            x = temp.next
-            self.tail = x
-            x.prev = temp
-
-    def _del_(self, valor):
-        temp = self.head
-        if self.largo == 0:
-            return print("La Lista esta vacia")
-        if temp.__str__() == valor:
-            self.head = temp.next
-            return
-        while temp.next != None:
-            if temp.next.__str__() == valor:
-                temp.next = temp.next.next
-                break
-            temp = temp.next
-        return
-
-    def dela(self, valor):
-        temp = self.head
-        if self.largo == 0:
-            return print("La Lista esta vacia")
-        while temp != self.tail.next:
-            if temp.__str__() == valor:
-                self.head = temp.next
-            if temp.next.__str__() == valor:
-                temp.next = temp.next.next
-            temp = temp.next
-        return
-
-    def insert(self, valor, pos):
-        if not pos <= self.largo:
-            return print("Error")
-        temp = self.head
-        i = 1
-        if pos == 0:
-            self.head = Nodo(valor=valor, next=temp)
-            temp.prev = self.head
-            self.largo += 1
-            return
-        while temp != None:
-            if i != pos:
-                temp = temp.next
-                i += 1
-            else:
-                temp2 = Nodo(temp, temp.prev, valor)
-                temp.prev.next = temp2
-                temp.prev = temp2
-                self.largo += 1
-                break
-        return"""
-
 x = Tren("thomas","s-c", 13, 2)
 x.enganchar_i(6)
 x.enganchar_f(5)
@@ -354,5 +250,5 @@ x.enganchar_f(7)
 x.printL()
 x.enganchar_m(2)
 x.printL()
-auto(600)
+x.auto(600)
 root.mainloop()
