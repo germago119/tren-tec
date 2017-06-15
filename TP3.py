@@ -5,11 +5,10 @@ import csv
 from tkinter import *
 from threading import Thread
 
+ #  ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
+ #  TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
 
-#ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
-#TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
-
-random.seed() #Mejora la variabilidad del random
+random.seed()  # Mejora la variabilidad del random
 
 A_TEC = ""
 SJ_TEC = ""
@@ -48,7 +47,7 @@ with open('vagones_prueba.csv', 'r') as archivo:
     print(vagones)
 
 #Asigna la hora a las rutas
-A_TEC= rutas[0]
+A_TEC = rutas[0]
 SJ_TEC = rutas[1]
 TEC_SJ = rutas[2]
 TEC_A = rutas[3]
@@ -172,7 +171,7 @@ class Vagon:
         self.next = next
         self.prev = prev
         self.capacidad_p = capacidad_p
-        self.estado  = estado
+        self.estado = estado
 
 
     def valor(self):
