@@ -94,7 +94,6 @@ class Tren:
             self.tail = self.tail.next
 
 
-
     def enganchar_f(self, num):
         self.vagones += 1
         temp = self.tail
