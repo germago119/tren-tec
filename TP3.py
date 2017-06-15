@@ -11,7 +11,6 @@ from threading import Thread
 
 random.seed() #Mejora la variabilidad del random
 
-# f = open('estacion.txt')
 A_TEC = ""
 SJ_TEC = ""
 TEC_SJ = ""
@@ -52,11 +51,6 @@ A_TEC= rutas[0]
 SJ_TEC = rutas[1]
 TEC_SJ = rutas[2]
 TEC_A = rutas[3]
-
-
-
-
-
 
 
 #                ______________________
