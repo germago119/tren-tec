@@ -55,7 +55,6 @@ TEC_A = rutas[3]
 
 #                ______________________
 #_______________/
-
 class Maquina:
     def __init__(self, num_maquina, capacidad_v):
         self.num_maquina = num_maquina
