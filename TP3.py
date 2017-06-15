@@ -46,6 +46,7 @@ with open('vagones_prueba.csv', 'r') as archivo:
         linea = l.split(";")
         if linea[3] == '0':
             vagones.append(linea[2])
+    print(vagones)
 
 #Asigna la hora a las rutas
 A_TEC= rutas[0]
@@ -177,16 +178,20 @@ def auto(cantidad): #Función para los vagones automaticos
     temp = vagones
     indice = 0
     conta = 0
+    prueba = []
     while conta <= cantidad:
         if temp == []:
             print("Cantidad de vagones insuficientes")
             break
         elif str(temp[0]) < str(cantidad):
-            Tren.self.enganchar_f(indice)
-            conta += cantidad
+            #Tren.self.enganchar_f(indice)
+            prueba += [temp[indice]]
+            conta += int(temp[indice])
             print('si entro al ciclo')
         else:
             break
+    print(prueba)
+
 
 
 
@@ -355,4 +360,5 @@ x.enganchar_f(7)
 x.printL()
 x.enganchar_m(2)
 x.printL()
+auto(600)
 root.mainloop()
