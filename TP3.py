@@ -11,7 +11,6 @@ from threading import Thread
 
 random.seed() #Mejora la variabilidad del random
 
-# f = open('estacion.txt')
 A_TEC = ""
 SJ_TEC = ""
 TEC_SJ = ""
@@ -53,11 +52,6 @@ A_TEC= rutas[0]
 SJ_TEC = rutas[1]
 TEC_SJ = rutas[2]
 TEC_A = rutas[3]
-
-
-
-
-
 
 
 #                ______________________
@@ -353,9 +347,9 @@ class ListaDoble:
 
 x = Tren("thomas","s-c", 13, 2)
 x.enganchar_i(6)
-#x.enganchar_f(5)
-#x.enganchar_f(9)
-#x.enganchar_f(1)
+x.enganchar_f(5)
+x.enganchar_f(9)
+x.enganchar_f(1)
 x.enganchar_f(7)
 x.printL()
 x.enganchar_m(2)
