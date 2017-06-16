@@ -16,6 +16,7 @@ TEC_SJ = ""
 TEC_A = ""
 
 
+
 #               ____________________________
 #______________/
 #Lee y asigna las horas de salida de las rutas
@@ -33,24 +34,74 @@ SJ_TEC = rutas[1]
 TEC_SJ = rutas[2]
 TEC_A = rutas[3]
 
-#                __________________________
-#_______________/
-# Lee los trenes que tiene el estado disponible
-vagones = []
-with open('vagones_prueba.csv', 'r') as archivo:
-    lista = archivo.read().splitlines()
-    lista.pop(0)
-    for l in lista:
-        linea = l.split(";")
-        if linea[3] == '0':
-            vagones.append(linea[2])
-    print(vagones)
 
 #Asigna la hora a las rutas
 A_TEC = rutas[0]
 SJ_TEC = rutas[1]
 TEC_SJ = rutas[2]
 TEC_A = rutas[3]
+
+#           _________________
+#__________/ Se define la clase Vagon
+class Vagon:
+    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None, estado = None):#Estado = 0 si el vagon esta desocupado, si es 1 el vagon esta ocupado
+        self.num_vagon = num_vagon
+        self.next = next
+        self.prev = prev
+        self.capacidad_p = capacidad_p
+        self.estado = estado
+
+
+    def valor(self):
+        return self.num_vagon
+#               _____________________________________________
+#______________/Inicializa las instancias de los vagones
+vagones = []
+m1 = open("vagones_prueba.csv", "r")
+m1_c = csv.reader(m1)
+for nombre, numero, capacidad, estado in m1_c:
+    vagones.append([nombre, numero, capacidad, estado])
+m1.close()
+
+v1=vagones[0]
+v2=vagones[1]
+v3=vagones[2]
+v4=vagones[3]
+v5=vagones[4]
+v6=vagones[5]
+v7=vagones[6]
+v8=vagones[7]
+v9=vagones[8]
+v10=vagones[9]
+
+vagon1 = Vagon(v1[1],None,None,v1[2],v1[3])
+vagon2 = Vagon(v2[1],None,None,v2[2],v2[3])
+vagon3 = Vagon(v3[1],None,None,v3[2],v3[3])
+vagon4 = Vagon(v4[1],None,None,v4[2],v4[3])
+vagon5 = Vagon(v5[1],None,None,v5[2],v5[3])
+vagon6 = Vagon(v6[1],None,None,v6[2],v6[3])
+vagon7 = Vagon(v7[1],None,None,v7[2],v7[3])
+vagon8 = Vagon(v8[1],None,None,v8[2],v8[3])
+vagon9 = Vagon(v9[1],None,None,v9[2],v9[3])
+vagon10 = Vagon(v10[1],None,None,v10[2],v10[3])
+
+vagones_a_evaluar=[Vagon(v1[1],None,None,v1[2],v1[3]), Vagon(v2[1],None,None,v2[2],v2[3]), Vagon(v3[1],None,None,v3[2],v3[3]), Vagon(v4[1],None,None,v4[2],v4[3]),
+                   Vagon(v5[1],None,None,v5[2],v5[3]), Vagon(v6[1],None,None,v6[2],v6[3]), Vagon(v7[1],None,None,v7[2],v7[3]), Vagon(v8[1],None,None,v8[2],v8[3]),
+                   Vagon(v9[1],None,None,v9[2],v9[3]), Vagon(v10[1],None,None,v10[2],v10[3])]
+####------------------------------------#####
+
+
+def vagon_libre(lista):
+    vagones_libres = []
+    for i in range(len(lista)):
+        temp = lista[i]
+        print("Aqui voy")
+        if temp.estado == 'Libre':
+            vagones_libres += [temp]
+            print("aqui voy 2")
+    return vagones_libres
+
+
 
 
 #                ______________________
@@ -137,21 +188,29 @@ class Tren:
     #                 ______________________________
     # ________________/Funcion que ejecuta lo automatico(No terminada)
     def auto(self, cantidad):  # Función para los vagones automaticos
-        temp = vagones
-        indice = 0
+        temp = vagon_libre(vagones_a_evaluar)
+        i = 0
         conta = 0
         prueba = []
         while conta <= cantidad:
-            if temp == []:
+            if i == len(temp):
                 print("Cantidad de vagones insuficientes")
                 break
-            elif str(temp[0]) < str(cantidad):
-                self.enganchar_f(indice)
-                prueba += [temp[indice]]
-                conta += int(temp[indice])
+            elif self.vagones == 0:
+                self.enganchar_i(temp[i].num_vagon)
+                temp[i].estado = "Ocupado"
+                prueba += [temp[i].num_vagon]
+                conta += int(temp[i].capacidad_p)
+                i += 1
                 print('si entro al ciclo')
+
             else:
-                break
+                self.enganchar_f(temp[i].num_vagon)
+                temp[i].estado = "Ocupado"
+                prueba += [temp[i].num_vagon]
+                conta += int(temp[i].capacidad_p)
+                i += 1
+                print('si entro al ciclo')
         print(prueba)
 
     #def exit(self):
@@ -161,19 +220,6 @@ class Tren:
         #Lee documento de Config
        #self.__init__(tren, ruta, hora, maquina, vagones)
 
-
-
-class Vagon:
-    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None, estado = 0):#Estado = 0 si el vagon esta desocupado, si es 1 el vagon esta ocupado
-        self.num_vagon = num_vagon
-        self.next = next
-        self.prev = prev
-        self.capacidad_p = capacidad_p
-        self.estado = estado
-
-
-    def valor(self):
-        return self.num_vagon
 
 
 #           _____________
@@ -239,13 +285,13 @@ a.start()
 
 
 x = Tren("thomas","s-c", 13, 2)
-x.enganchar_i(6)
-x.enganchar_f(5)
-x.enganchar_f(9)
-x.enganchar_f(1)
-x.enganchar_f(7)
 x.printL()
-x.enganchar_m(2)
+x.auto(100)
 x.printL()
-x.auto(600)
+b = Tren("Ricardo","s-c", 13, 2)
+b.auto(100)
+b.printL()
+a = Tren("Lola", "SS", 13, 2)
+a.auto(600)
+a.printL()
 root.mainloop()
