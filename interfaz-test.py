@@ -9,16 +9,22 @@ ventana_principal.title("Estacion TEC")
 ventana_principal.minsize(1560, 1000)
 ventana_principal.resizable(width=NO, height=NO)
 
-contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg="#ffffff")
+contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg="#87ceeb")
 contenedor_principal.place(x=0, y=0)
 
 user_entry = StringVar()
+demanda_variable = StringVar()
+auto_var = 'VAGON 1'
+
 
 def cargarImagen(nombre):
     ruta = os.path.join('Imagenes', nombre)
     imagen = PhotoImage(file=ruta)
     return imagen
 
+irazu_frame = cargarImagen('13.png')
+irazu = Label(contenedor_principal, bg='white', image=irazu_frame)
+irazu.place(x=750, y=3)
 
 frame_tec = cargarImagen("tec.png")
 tec = Label(contenedor_principal, bg='white', image=frame_tec)
@@ -32,14 +38,37 @@ gam_frame = cargarImagen("gam2.png")
 gam = Label(contenedor_principal, bg='white', image=gam_frame)
 gam.place(x=300, y=190)
 
-canvas = Canvas(ventana_principal, width=300, height=700, bg='red')
-canvas.place(x=0, y=0)
+canvas_r = Canvas(ventana_principal, width=300, height=700, bg='red')
+canvas_r.place(x=0, y=0)
 
 canvas_v = Canvas(ventana_principal, width=300, height=300, bg='green')
 canvas_v.place(x=0, y=700)
 
 consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
 consola.place(x=300, y=700)
+
+rutas_title = Label(canvas_r, text='Rutas proximas', bg='red', fg='white', font=("Roboto Slab", 24, "bold"))
+rutas_title.place(x=10, y=10)
+
+vagones_title = Label(canvas_v, text='Vagones Disponibles', bg='green', fg='white', font=("Roboto Slab", 20, "bold"))
+vagones_title.place(x=10, y=10)
+
+demanda_l = Label(consola,text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
+demanda_l.place(x=300, y=30)
+
+demanda_var = Label(consola, text="Variable", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
+demanda_var.place(x=520, y=30)
+
+body = 'Segun la demanda el programa selecciono los vagones ' + auto_var + ' para la siguiente salida.' \
+                        ' Si desea puede escoger los vagones de forma manual o permiterle la salida del tren asi.'
+
+message = Text(consola, height=9, width=87)
+message.insert(END, body)
+message.config(wrap=WORD)
+message.tag_add("Body", 1.0, 99.9)
+message.tag_config("Body", background='grey', foreground='white', font=("Roboto Slab", 20))
+message.config(state=DISABLED)
+message.place(x=270, y=110)
 
 
 def ventanaManual():
@@ -134,17 +163,17 @@ def ventanaManual():
 
 
 bgreen = cargarImagen("bgreen.png")
-manual_b = Button(consola, image=bgreen, command = ventanaManual, bg='gray')
+manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
 manual_b.place(x=20, y=10)
 
 manual_l = Label(consola, text="Manual", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
-manual_l.place(x=20, y=240)
+manual_l.place(x=60, y=220)
 
 bblue = cargarImagen("bblue.png")
-auto_b = Button(consola, image=bblue, command = ventanaManual, bg='gray')
+auto_b = Button(consola, image=bblue, command=ventanaManual, bg='gray')
 auto_b.place(x=1000, y=10)
 
 manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
-manual_l.place(x=1000, y=240)
+manual_l.place(x=1000, y=220)
 
 ventana_principal.mainloop()
