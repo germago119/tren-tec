@@ -133,8 +133,18 @@ def ventanaManual():
     ventana_manual.mainloop()
 
 
+bgreen = cargarImagen("bgreen.png")
+manual_b = Button(consola, image=bgreen, command = ventanaManual, bg='gray')
+manual_b.place(x=20, y=10)
 
-manual = Button(consola, text='Manual', command = ventanaManual, fg='white', bg='black', font=("Source Code Pro", 20, "bold"))
-manual.place(x=20, y=50)
+manual_l = Label(consola, text="Manual", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
+manual_l.place(x=20, y=240)
+
+bblue = cargarImagen("bblue.png")
+auto_b = Button(consola, image=bblue, command = ventanaManual, bg='gray')
+auto_b.place(x=1000, y=10)
+
+manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
+manual_l.place(x=1000, y=240)
 
 ventana_principal.mainloop()
