@@ -21,30 +21,19 @@ TEC_A = ""
 #______________/
 #Lee y asigna las horas de salida de las rutas
 rutas = []
-with open('rutas.csv', 'r') as archivo:
-    lista = archivo.read().splitlines()
-    lista.pop(0)
-    for l in lista:
-        linea = l.split(";")
-        rutas.append(linea[2])
-
-# Asigna la hora a las rutas
-A_TEC = rutas[0]
-SJ_TEC = rutas[1]
-TEC_SJ = rutas[2]
-TEC_A = rutas[3]
+m1 = open("rutas.csv", "r")
+m1_c = csv.reader(m1)
+for nombre, hora in m1_c:
+    rutas.append([nombre, hora])
+m1.close()
 
 
-#Asigna la hora a las rutas
-A_TEC = rutas[0]
-SJ_TEC = rutas[1]
-TEC_SJ = rutas[2]
-TEC_A = rutas[3]
 
 #           _________________
 #__________/ Se define la clase Vagon
 class Vagon:
-    def __init__(self, num_vagon=None, next=None, prev=None, capacidad_p=None, estado = None):#Estado = 0 si el vagon esta desocupado, si es 1 el vagon esta ocupado
+    def __init__(self, nombre = None, num_vagon=None, next=None, prev=None, capacidad_p=None, estado = None):
+        self.nombre = nombre
         self.num_vagon = num_vagon
         self.next = next
         self.prev = prev
@@ -56,12 +45,14 @@ class Vagon:
         return self.num_vagon
 #               _____________________________________________
 #______________/Inicializa las instancias de los vagones
+"""Lee los datos de los vagones en los archivos csv"""
 vagones = []
-m1 = open("vagones_prueba.csv", "r")
-m1_c = csv.reader(m1)
-for nombre, numero, capacidad, estado in m1_c:
+m2 = open("vagones_prueba.csv", "r")
+m2_c = csv.reader(m2)
+for nombre, numero, capacidad, estado in m2_c:
     vagones.append([nombre, numero, capacidad, estado])
-m1.close()
+m2.close()
+
 
 v1=vagones[0]
 v2=vagones[1]
@@ -74,35 +65,43 @@ v8=vagones[7]
 v9=vagones[8]
 v10=vagones[9]
 
-vagon1 = Vagon(v1[1],None,None,v1[2],v1[3])
-vagon2 = Vagon(v2[1],None,None,v2[2],v2[3])
-vagon3 = Vagon(v3[1],None,None,v3[2],v3[3])
-vagon4 = Vagon(v4[1],None,None,v4[2],v4[3])
-vagon5 = Vagon(v5[1],None,None,v5[2],v5[3])
-vagon6 = Vagon(v6[1],None,None,v6[2],v6[3])
-vagon7 = Vagon(v7[1],None,None,v7[2],v7[3])
-vagon8 = Vagon(v8[1],None,None,v8[2],v8[3])
-vagon9 = Vagon(v9[1],None,None,v9[2],v9[3])
-vagon10 = Vagon(v10[1],None,None,v10[2],v10[3])
+vagon1 = Vagon(v1[0], v1[1],None,None,v1[2],v1[3])
+vagon2 = Vagon(v2[0], v2[1],None,None,v2[2],v2[3])
+vagon3 = Vagon(v3[0], v3[1],None,None,v3[2],v3[3])
+vagon4 = Vagon(v4[0], v4[1],None,None,v4[2],v4[3])
+vagon5 = Vagon(v5[0], v5[1],None,None,v5[2],v5[3])
+vagon6 = Vagon(v6[0], v6[1],None,None,v6[2],v6[3])
+vagon7 = Vagon(v7[0], v7[1],None,None,v7[2],v7[3])
+vagon8 = Vagon(v8[0], v8[1],None,None,v8[2],v8[3])
+vagon9 = Vagon(v9[0], v9[1],None,None,v9[2],v9[3])
+vagon10 = Vagon(v10[0], v10[1],None,None,v10[2],v10[3])
 
-vagones_a_evaluar=[Vagon(v1[1],None,None,v1[2],v1[3]), Vagon(v2[1],None,None,v2[2],v2[3]), Vagon(v3[1],None,None,v3[2],v3[3]), Vagon(v4[1],None,None,v4[2],v4[3]),
-                   Vagon(v5[1],None,None,v5[2],v5[3]), Vagon(v6[1],None,None,v6[2],v6[3]), Vagon(v7[1],None,None,v7[2],v7[3]), Vagon(v8[1],None,None,v8[2],v8[3]),
-                   Vagon(v9[1],None,None,v9[2],v9[3]), Vagon(v10[1],None,None,v10[2],v10[3])]
+vagones_a_evaluar=[vagon1,vagon2,vagon3,vagon4,vagon5,vagon6,vagon7,vagon8,vagon9,vagon10]
 ####------------------------------------#####
 
-
+#          ______________________________
+#_________/Función que realiza una lista con los vagones que se encuentran disponibles
 def vagon_libre(lista):
     vagones_libres = []
     for i in range(len(lista)):
         temp = lista[i]
-        print("Aqui voy")
         if temp.estado == 'Libre':
             vagones_libres += [temp]
-            print("aqui voy 2")
     return vagones_libres
+#####--------------------------------#####
 
+#           ___________________
+#__________/Función que Imprime el nombre y la capacidad de los vagones disponibles
 
+para_print= vagon_libre(vagones_a_evaluar) #Variable para que se use para printear los vagones disponibles
+def print_nombres(lista):
+    nombre_disponibles = []
+    for i in range(len(lista)):
+        temp = lista[i]
+        nombre_disponibles.append([temp.nombre, temp.capacidad_p])
+    print(nombre_disponibles)
 
+#def print_rutas(ruta)
 
 #                ______________________
 #_______________/
@@ -202,7 +201,7 @@ class Tren:
                 prueba += [temp[i].num_vagon]
                 conta += int(temp[i].capacidad_p)
                 i += 1
-                print('si entro al ciclo')
+
 
             else:
                 self.enganchar_f(temp[i].num_vagon)
@@ -210,7 +209,6 @@ class Tren:
                 prueba += [temp[i].num_vagon]
                 conta += int(temp[i].capacidad_p)
                 i += 1
-                print('si entro al ciclo')
         print(prueba)
 
     #def exit(self):
@@ -267,7 +265,7 @@ lbl_tec_sj.place(x= 825, y = 350)
 
 #               _________________________
 #______________/Animacion del Reloj
-clock = Label(root, font=('Consolas', 40), bg="Black", fg="green")
+"""clock = Label(root, font=('Consolas', 40), bg="Black", fg="green")
 clock.pack()
 clock.place (x=800, y=70)
 time1 = ""
@@ -280,11 +278,11 @@ def reloj ():
     clock.after(500,reloj)
 
 a = Thread(target = reloj, args = ())
-a.start()
+a.start()"""
 #-----------------------------------------------#
 
 
-x = Tren("thomas","s-c", 13, 2)
+"""x = Tren("thomas","s-c", 13, 2)
 x.printL()
 x.auto(100)
 x.printL()
@@ -293,5 +291,5 @@ b.auto(100)
 b.printL()
 a = Tren("Lola", "SS", 13, 2)
 a.auto(600)
-a.printL()
+print(print_nombres(vagon_libre(vagones_a_evaluar)))"""
 root.mainloop()
