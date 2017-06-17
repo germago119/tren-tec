@@ -45,10 +45,10 @@ consola.place(x=300, y=700)
 def ventanaManual():
     ventana_manual = Toplevel()
     ventana_manual.title("Modo Manual")
-    ventana_manual.minsize(1000, 500)
+    ventana_manual.minsize(800, 500)
     ventana_manual.resizable(width=NO, height=NO)
 
-    fondo = Canvas(ventana_manual, width=1000, height=500, bg="white")
+    fondo = Canvas(ventana_manual, width=800, height=500, bg="white")
     fondo.place(x=0, y=0)
 
     demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold") )
@@ -57,37 +57,30 @@ def ventanaManual():
     demanda = Label(fondo, text="123456789", fg='black', font=("Roboto Slab", 22, "bold"))
     demanda.place(x=20, y=80)
 
-    vagones_title = Label(fondo, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones_title.place(x=20, y=180)
+    vagones_canvas = Canvas(ventana_manual, width=350, height=300, bg='blue')
+    vagones_canvas.place(x=0, y=200)
 
-    vagones = Label(fondo, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones.place(x=20, y=260)
+    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones_title.place(x=20, y=0)
 
-    vagones_1 = Label(fondo, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones_1.place(x=20, y=320)
+    vagones = Label(vagones_canvas, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones.place(x=20, y=60)
 
-    vagones_2 = Label(fondo, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones_2.place(x=20, y=380)
-
-    vagones_3 = Label(fondo, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones_3.place(x=20, y=450)
-
-
-    shell = Entry(fondo, width=30, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
-                  font=("Source Code Pro", 20, "bold"), textvariable=user_entry)
-    shell.place(x=370, y=50)
+    shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
+                  font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
+    shell.place(x=385, y=50)
 
     eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
-    eng_i.place(x=370, y=120)
+    eng_i.place(x=385, y=120)
 
     eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
-    eng_m.place(x=570, y=120)
+    eng_m.place(x=585, y=120)
 
     eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
-    eng_f.place(x=770, y=120)
+    eng_f.place(x=385, y=250)
 
-    quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nultimo vagon', font=("Roboto Slab", 20, "bold"))
-    quitar_v.place(x=570, y=240)
+    quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
+    quitar_v.place(x=585, y=250)
 
 
     def regresar():
@@ -96,20 +89,46 @@ def ventanaManual():
     def VentanaHelp():
         ventanahelp = Toplevel()
         ventanahelp.title("Help")
-        ventanahelp.minsize(500, 500)
+        ventanahelp.minsize(200, 200)
         ventanahelp.resizable(width=NO, height=NO)
+
+        S = Scrollbar(ventanahelp)
+        help_text = Text(ventanahelp, width=100, height=30)
+        S.pack(side=RIGHT, fill=Y)
+        help_text.pack(side=LEFT, fill=Y)
+        S.config(command=help_text.yview)
+        help_text.config(yscrollcommand=S.set)
+
+        body = "Bienvenido a la ventana de ayuda del modo Manual.\n\nEn el cuadro de entrada de texto se deben escribir " \
+               "el nombre de alguno de los vagones disponibles que se encuntran en cuadro izquierdo y presionar alguno " \
+               "de los siguientes botones: " \
+               "\nNote que se debe escribir EXACTAMENTE el nombre del vagon a como se muestra en el cuadro " \
+               "de vagones disponibles." \
+               "\n\nBotones: \n\nEnganchar al inicio: Se agrega el vagon escrito en la entrada de texto al inicio del tren." \
+               "\nEnganchar en el medio: Se agrega el vagon escrito en la entrada de texto en el medio del tren. " \
+               "\nEnganchar al final: Se agrega el vagon escrito en la entrada de texto al final del tren. " \
+               "\nQuitar vagon: Se libera el vagon escrito en la entrada de texto del tren."
+
+        #           ____________________________
+        # __________/ Se crean tags para darle formato al contenido de la pantalla de Ayuda
+        help_text.insert(END, body)
+        help_text.config(wrap=WORD)
+        help_text.tag_add("Body", 1.0, 99.9)
+        help_text.tag_config("Body", font=("Roboto Slab", 20))
+        help_text.config(state=DISABLED)
+
 
         ventanahelp.mainloop()
 
     imagenvolverbk = cargarImagen("exit.png")
     botonvolver = Button(fondo, image=imagenvolverbk, command=regresar, fg="#000000", bg="#00cc00",
                          activebackground="#cc2900")
-    botonvolver.place(x=900, y=410)
+    botonvolver.place(x=710, y=420)
 
     imagenhelp = cargarImagen("help.png")
     botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg="#00cc00",
                        fg="#000000", activebackground="#cc2900")
-    botonhelp.place(x=800, y=410)
+    botonhelp.place(x=610, y=420)
 
     ventana_manual.mainloop()
 
