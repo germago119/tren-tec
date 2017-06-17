@@ -290,6 +290,7 @@ b = Tren("Ricardo","s-c", 13, 2)
 b.auto(100)
 b.printL()
 a = Tren("Lola", "SS", 13, 2)
-a.auto(600)
-print(print_nombres(vagon_libre(vagones_a_evaluar)))"""
+a.auto(600)"""
+print(print_nombres(vagon_libre(vagones_a_evaluar)))
+
 root.mainloop()
