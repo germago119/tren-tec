@@ -12,7 +12,7 @@ ________________________________________________________________________________
 |                            Tercera Tarea Progradamada                          |
 |                              Taller de Programacion                            |
 |          Simulador de estación de trenes del Tecnológico de Costa Rica         |
-|            All Rights Reserved to Kevyn Guadamuz and Roger Valderrama          |
+|          ® All Rights Reserved to Kevyn Guadamuz and Roger Valderrama ®        |
 |________________________________________________________________________________|
 """
 random.seed()  # Mejora la variabilidad del random
@@ -136,6 +136,7 @@ class Tren:
                 nodo = nodo.next
         res += "]"
         print(res)
+        return res
 
     def enganchar_i(self, num):
         self.vagones += 1
@@ -412,7 +413,7 @@ def ventanaManual():
                "\nEnganchar al final: Se agrega el vagon escrito en la entrada de texto al final del tren. " \
                "\nQuitar vagon: Se libera el vagon escrito en la entrada de texto del tren."
 
-        #           ____________________________
+        #            ____________________________
         # __________/ Se crean tags para darle formato al contenido de la pantalla de Ayuda
         help_text.insert(END, body)
         help_text.config(wrap=WORD)
@@ -476,48 +477,61 @@ def ventanaAuto():
                           font=("Roboto Slab", 22, "bold"), value=3, command = evalua).place(x=385, y=200)
     RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg='white', fg='black',
                           font=("Roboto Slab", 22, "bold"), value=4, command = evalua).place(x=385, y=240)
+
 #tren2.estado = "Ocupado"
 print(tren1.estado)
 print(tren2.estado)
+
 #Funcion que evalua los CheckButton seleccionados
 def evalua():
     r = radio.get()
     a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
     if r == 1 and tren5.estado == "Libre":
         tren5.auto(demanda_variable.get())
-        simpledialo("Los vagones que añadieron al Tren 1 son: ", tren5.printL())
+        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ", str(tren5.printL() + " \nSaldra de la estación en este momento "))
         tren5.printL()
+        tren5.estado = "Ocupado"
         vagones_lbl.config(text = a)
         ventana_principal.update()
         verificar_vagones(tren5.vagones)
+        
         actualiza()
 
     elif r == 2 and tren2.estado == "Libre":
         tren2.auto(demanda_variable.get())
-        print("Los vagones que tiene el Tren 2 son: ")
+        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ",
+                            str(tren2.printL() + " \nSaldra de la estación en este momento "))
         tren2.printL()
+        tren2.estado = "Ocupado"
         vagones_lbl.config(text=a)
         ventana_principal.update()
         verificar_vagones(tren2.vagones)
         actualiza()
+
     elif r == 3 and tren3.estado == "Libre":
         tren3.auto(demanda_variable.get())
-        print("Los vagones que tiene el Tren 3 son: ")
+        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ",
+                            str(tren3.printL() + " \nSaldra de la estación en este momento "))
         tren3.printL()
+        tren3.estado = "Ocupado"
         vagones_lbl.config(text=a)
         ventana_principal.update()
         verificar_vagones(tren3.vagones)
         actualiza()
+
     elif r == 4  and tren4.estado == "Libre":
         tren4.auto(demanda_variable.get())
-        print("Los vagones que tiene el Tren 4 son: ")
+        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ",
+                            str(tren4.printL() + " \nSaldra de la estación en este momento "))
         tren4.printL()
+        tren4.estado = "Ocupado"
         vagones_lbl.config(text=a)
         ventana_principal.update()
         verificar_vagones(tren4.vagones)
         actualiza()
+
     else:
-        messagebox.showwarning("Tren no disponible", "El tren que ha seleccionado no se encuentra disponible")
+        messagebox.showerror("Tren no disponible", "El tren que ha seleccionado no se encuentra disponible")
 
 def actualiza():
     demanda_variable.set(random_pasajeros())
