@@ -1,5 +1,4 @@
 import os
-import time
 import random
 import csv
 from tkinter import *
@@ -281,6 +280,12 @@ auto_var = StringVar()
 auto_var = "Vagon 1"
 bg_r = '#EB6841'
 bg_v = '#EDC951'
+
+time_var = 7
+time = '{}:00'.format(time_var)
+
+time_clock = Label(contenedor_principal, bg='#272822', fg='red', text=time, font=("Roboto Slab", 60, "bold"))
+time_clock.place(x=307, y=5)
 
 #         __________________
 #________/Funcion que evalua el select de el automatico
