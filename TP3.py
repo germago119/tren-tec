@@ -6,18 +6,18 @@ from tkinter import *
 from threading import Thread
 from tkinter import messagebox
 
-
- #  ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
- #  TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
-
+###############################################################################################
+"""
+_________________________________________________________________________________
+|                            Tercera Tarea Progradamada                          |
+|                              Taller de Programacion                            |
+|          Simulador de estación de trenes del Tecnológico de Costa Rica         |
+|            All Rights Reserved to Kevyn Guadamuz and Roger Valderrama          |
+|________________________________________________________________________________|
+"""
 random.seed()  # Mejora la variabilidad del random
 
-A_TEC = ""
-SJ_TEC = ""
-TEC_SJ = ""
-TEC_A = ""
 sky_blue = "#87ceeb"
-
 
 #               ____________________________
 #______________/
@@ -80,6 +80,7 @@ vagon10 = Vagon(v10[0], v10[1],None,None,v10[2],v10[3])
 
 vagones_a_evaluar=[vagon1,vagon2,vagon3,vagon4,vagon5,vagon6,vagon7,vagon8,vagon9,vagon10]
 ####------------------------------------#####
+
 #          ______________________________
 #_________/Función que realiza una lista con los vagones que se encuentran disponibles
 def vagon_libre(lista):
@@ -113,12 +114,13 @@ class Maquina:
 #         ______________
 #________/Se define la clase Tren
 class Tren:
-    def __init__(self, tren = None, ruta = None, hora = None, num = None):
+    def __init__(self, tren = None, ruta = None, hora = None, num = None, estado = None):
         self.num_tren = tren
         self.ruta = ruta
         self.hora = hora
         self.num_maquina = num
         self.vagones = 0
+        self.estado = estado
         self.head = None
         self.tail = None
 
@@ -224,21 +226,22 @@ class Tren:
 #_____________/ Inicializa las instancias de la clase Tren
 """Lee los archivos de tren desde el archivo .csv"""
 trenes = []
-m3 = open("trenes.csv", "r")
+m3 = open("trenes.csv", "r")#Se lee el archivo CSV
 m3_c = csv.reader(m3)
-for tren, ruta, hora, num in m3_c:
-    trenes.append([tren, ruta, hora, num])
+for tren, ruta, hora, num, estado in m3_c:#Se crea una sublista con los atributos de los trenes
+    trenes.append([tren, ruta, hora, num, estado])
+
 
 t1 = trenes[0]
 t2 = trenes[1]
 t3 = trenes[2]
 t4 = trenes[3]
-"""Inicializa las instancias de los trenes"""
-tren1 = Tren(t1[0],t1[1],t1[2],t1[3])
-tren2 = Tren(t2[0],t2[1],t2[2],t2[3])
-tren3 = Tren(t3[0],t3[1],t3[2],t3[3])
-tren4 = Tren(t4[0],t4[1],t4[2],t4[3])
 
+"""Inicializa las instancias de los trenes"""
+tren1 = Tren(t1[0],t1[1],t1[2],t1[3],t1[4])
+tren2 = Tren(t2[0],t2[1],t2[2],t2[3],t2[4])
+tren3 = Tren(t3[0],t3[1],t3[2],t3[3],t3[4])
+tren4 = Tren(t4[0],t4[1],t4[2],t4[3],t4[4])
 
 
 #           _____________
