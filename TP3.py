@@ -49,7 +49,7 @@ class Vagon:
 #______________/Inicializa las instancias de los vagones
 """Lee los datos de los vagones en los archivos csv"""
 vagones = []
-m2 = open("vagones_prueba.csv", "r")
+m2 = open("vagones.csv", "r")
 m2_c = csv.reader(m2)
 for nombre, numero, capacidad, estado in m2_c:
     vagones.append([nombre, numero, capacidad, estado])
@@ -94,23 +94,24 @@ def vagon_libre(lista):
 #           ___________________
 #__________/Función que Imprime el nombre y la capacidad de los vagones disponibles
 
-mierdas = vagon_libre(vagones_a_evaluar)#Variable para que se use para printear los vagones disponibles
+#Variable para que se use para printear los vagones disponibles
 def print_nombres(lista):
     nombre_disponibles = []
     for i in range(len(lista)):
         temp = lista[i]
-        nombre_disponibles.append([temp.nombre, temp.capacidad_p])
+        if temp.estado == "Libre":
+            nombre_disponibles.append([temp.nombre, temp.capacidad_p])
     return nombre_disponibles
 
-#def print_rutas(ruta)
-
 #                ______________________
-#_______________/
+#_______________/Se define la clase maquina
 class Maquina:
     def __init__(self, num_maquina, capacidad_v):
         self.num_maquina = num_maquina
         self.capacidad_v = capacidad_v
 
+#         ______________
+#________/Se define la clase Tren
 class Tren:
     def __init__(self, tren = None, ruta = None, hora = None, num = None):
         self.num_tren = tren
@@ -243,10 +244,9 @@ tren4 = Tren(t4[0],t4[1],t4[2],t4[3])
 #           _____________
 #__________/ Función con el numero aleatorio de pasajeros
 def random_pasajeros():
-    pasa = (random.randrange(0, 401))
+    pasa = (random.randrange(1, 1001))
     print("Random es: ", pasa)
     return pasa
-
 
 
 
@@ -273,6 +273,8 @@ demanda_variable = IntVar()
 demanda_variable.set(random_pasajeros())
 auto_var = StringVar()
 auto_var = "Vagon1"
+
+
 
 
 
@@ -320,7 +322,7 @@ rutas_lbl.place(x=10, y=50)
 vagones_title = Label(canvas_r, text='Vagones Disponibles', bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
 vagones_title.place(x=10, y=10)
 
-vagones_lbl = Label(canvas_r, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
+vagones_lbl = Label(canvas_r, text="\n".join(map(str,print_nombres(vagones_a_evaluar))), bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
 vagones_lbl.place(x=10, y=50)
 
 demanda_l = Label(consola,text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
@@ -456,8 +458,8 @@ def ventanaAuto():
     vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
     vagones_title.place(x=20, y=0)
 
-    vagones = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones.place(x=20, y=60)#Arreglar el print
+    vagones_auto = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones_auto.place(x=20, y=60)#Arreglar el print
 
     shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
@@ -489,25 +491,34 @@ def ventanaAuto():
 
 def evalua():
     r = radio.get()
+    a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
     if r == 1:
         tren1.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 1 son: ")
         tren1.printL()
+        vagones_lbl.config(text = a)
+        ventana_principal.update()
         actualiza()
     elif r == 2:
         tren2.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 2 son: ")
         tren2.printL()
+        vagones_lbl.config(text=a)
+        ventana_principal.update()
         actualiza()
     elif r == 3:
         tren3.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 3 son: ")
         tren3.printL()
+        vagones_lbl.config(text=a)
+        ventana_principal.update()
         actualiza()
     else:
         tren4.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 4 son: ")
         tren4.printL()
+        vagones_lbl.config(text=a)
+        ventana_principal.update()
         actualiza()
 
 def actualiza():
