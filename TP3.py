@@ -275,8 +275,9 @@ user_entry = StringVar()
 demanda_variable = IntVar()
 demanda_variable.set(random_pasajeros())
 auto_var = StringVar()
-auto_var = "Vagon1"
-
+auto_var = "Vagon 1"
+bg_r = 'red'
+bg_v = 'green'
 
 #         __________________
 #________/Funcion que evalua el select de el automatico
@@ -301,27 +302,27 @@ gam_frame = cargarImagen("gam.png")
 gam = Label(contenedor_principal, bg=sky_blue, image=gam_frame)
 gam.place(x=300, y=180)
 
-canvas_r = Canvas(ventana_principal, width=300, height=700, bg='red')
+canvas_r = Canvas(ventana_principal, width=300, height=500, bg='red')
 canvas_r.place(x=0, y=0)
 
-canvas_v = Canvas(ventana_principal, width=300, height=300, bg='green')
-canvas_v.place(x=0, y=700)
+canvas_v = Canvas(ventana_principal, width=300, height=500, bg='green')
+canvas_v.place(x=0, y=500)
 
 consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
 consola.place(x=300, y=700)
 
-rutas_title = Label(canvas_v, text='Rutas proximas', bg='green', fg='white', font=("Roboto Slab", 24, "bold"))
+rutas_title = Label(canvas_r, text='Rutas proximas', bg=bg_r, fg='white', font=("Roboto Slab", 24, "bold"))
 rutas_title.place(x=10, y=10)
 
-rutas_lbl = Label(canvas_v, text="\n".join(map(str, rutas)), bg='green', fg='white', font=("Roboto Slab", 20, "bold"))
-rutas_lbl.place(x=10, y=50)
+rutas_lbl = Label(canvas_r, text="\n".join(map(str, rutas)), bg=bg_r, fg='white', font=("Roboto Slab", 21, "bold"))
+rutas_lbl.place(x=10, y=70)
 
-
-vagones_title = Label(canvas_r, text='Vagones Disponibles', bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
+vagones_title = Label(canvas_v, text='Vagones Disponibles', bg=bg_v, fg='white', font=("Roboto Slab", 20, "bold"))
 vagones_title.place(x=10, y=10)
 
-vagones_lbl = Label(canvas_r, text="\n".join(map(str,print_nombres(vagones_a_evaluar))), bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
-vagones_lbl.place(x=10, y=50)
+vagones_lbl = Label(canvas_v, text="\n".join(map(str,print_nombres(vagones_a_evaluar))), bg=bg_v, fg='white',
+                    font=("Roboto Slab", 21, "bold"))
+vagones_lbl.place(x=10, y=70)
 
 demanda_l = Label(consola,text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_l.place(x=300, y=30)
