@@ -273,8 +273,8 @@ demanda_variable = IntVar()
 demanda_variable.set(random_pasajeros())
 auto_var = StringVar()
 auto_var = "Vagon 1"
-bg_r = 'red'
-bg_v = 'green'
+bg_r = '#EB6841'
+bg_v = '#EDC951'
 
 #         __________________
 #________/Funcion que evalua el select de el automatico
@@ -299,10 +299,10 @@ gam_frame = cargarImagen("gam.png")
 gam = Label(contenedor_principal, bg=sky_blue, image=gam_frame)
 gam.place(x=300, y=180)
 
-canvas_r = Canvas(ventana_principal, width=300, height=500, bg='red')
+canvas_r = Canvas(ventana_principal, width=300, height=500, bg=bg_r)
 canvas_r.place(x=0, y=0)
 
-canvas_v = Canvas(ventana_principal, width=300, height=500, bg='green')
+canvas_v = Canvas(ventana_principal, width=300, height=500, bg=bg_v)
 canvas_v.place(x=0, y=500)
 
 consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
@@ -346,39 +346,46 @@ def ventanaManual():
     ventana_manual.minsize(800, 500)
     ventana_manual.resizable(width=NO, height=NO)
 
-    fondo = Canvas(ventana_manual, width=800, height=500, bg="white")
+    green_m = '#A6E22E'
+    bg_v_manual = '#AE81FF'
+    bg_entry = '#FD971F'
+    bg = '#272822'
+
+    fondo = Canvas(ventana_manual, width=800, height=500, bg=bg)
     fondo.place(x=0, y=0)
 
-    demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold") )
-    demanda_title.place(x=20, y=20)
+    demanda_title = Label(fondo, text='Demanda: ', fg="white", font=("Roboto Slab", 22, "bold"), bg=bg)
+    demanda_title.place(x=385, y=20)
 
-    demanda = Label(fondo, textvariable=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"))
-    demanda.place(x=20, y=80)
+    demanda = Label(fondo, textvariable=demanda_variable, fg='white', font=("Roboto Slab", 22, "bold"), bg=bg)
+    demanda.place(x=540, y=20)
 
-    vagones_canvas = Canvas(ventana_manual, width=350, height=300, bg='blue')
-    vagones_canvas.place(x=0, y=200)
+    vagones_canvas = Canvas(ventana_manual, width=350, height=500, bg=bg_v_manual)
+    vagones_canvas.place(x=0, y=0)
 
-    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='white', font=("Roboto Slab", 22, "bold")
+                          , bg=bg_v_manual)
     vagones_title.place(x=20, y=0)
 
-    vagones = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='white',
+                    font=("Roboto Slab", 22, "bold"), bg=bg_v_manual)
     vagones.place(x=20, y=60)
 
-    shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
+    shell = Entry(fondo, width=17, bg=bg_entry, fg='white', insertwidth=10, borderwidth=3,
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
-    shell.place(x=385, y=50)
+    shell.place(x=385, y=70)
 
-    eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
-    eng_i.place(x=385, y=120)
+    eng_i = Button(fondo, fg='white', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"), bg=bg)
+    eng_i.place(x=385, y=140)
 
-    eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
-    eng_m.place(x=585, y=120)
+    eng_m = Button(fondo, fg='white', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"), bg=bg)
+    eng_m.place(x=585, y=140)
 
-    eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
-    eng_f.place(x=385, y=250)
+    eng_f = Button(fondo, fg='white', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"), bg=bg)
+    eng_f.place(x=385, y=270)
 
-    quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
-    quitar_v.place(x=585, y=250)
+    quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg)
+    quitar_v.place(x=585, y=270)
 
 
     def regresar():
@@ -418,15 +425,19 @@ def ventanaManual():
 
         ventanahelp.mainloop()
 
+    imagenplay = cargarImagen("play.png")
+    botonplay = Button(fondo, image=imagenplay, command=regresar, bg=green_m,
+                         activebackground=bg_entry)
+    botonplay.place(x=710, y=425)
+
     imagenvolverbk = cargarImagen("exit.png")
-    botonvolver = Button(fondo, image=imagenvolverbk, command=regresar, fg="#000000", bg="#00cc00",
-                         activebackground="#cc2900")
-    botonvolver.place(x=710, y=420)
+    botonvolver = Button(fondo, image=imagenvolverbk, command=regresar, bg=green_m,
+                         activebackground=bg_entry)
+    botonvolver.place(x=360, y=425)
 
     imagenhelp = cargarImagen("help.png")
-    botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg="#00cc00",
-                       fg="#000000", activebackground="#cc2900")
-    botonhelp.place(x=610, y=420)
+    botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
+    botonhelp.place(x=440, y=425)
 
     ventana_manual.mainloop()
 
@@ -454,8 +465,9 @@ def ventanaAuto():
     vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
     vagones_title.place(x=20, y=0)
 
-    vagones_auto = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones_auto.place(x=20, y=60)#Arreglar el print
+    vagones_auto = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black',
+                         font=("Roboto Slab", 22, "bold"))
+    vagones_auto.place(x=20, y=60)
 
     shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
@@ -643,3 +655,5 @@ manual_l.place(x=1000, y=220)
 
 
 ventana_principal.mainloop()
+
+
