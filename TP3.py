@@ -88,7 +88,6 @@ def vagon_libre(lista):
         temp = lista[i]
         if temp.estado == "Libre":
             vagones_libres += [temp]
-            print(temp.nombre)
     return vagones_libres
 #####--------------------------------#####
 
@@ -251,13 +250,12 @@ def random_pasajeros():
 
 
 
-#                __________________
+#               __________________
 #______________/Parte de Interfaz
 def cargarImagen(nombre):#Función para cargar las imágenes
     ruta = os.path.join('Imagenes', nombre)
     imagen = PhotoImage(file=ruta)
     return imagen
-
 
 
 #               ___________________
@@ -271,10 +269,15 @@ contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg="#8
 contenedor_principal.place(x=0, y=0)
 
 user_entry = StringVar()
-demanda_variable = StringVar()
-demanda_variable = random_pasajeros()
+demanda_variable = IntVar()
+demanda_variable.set(random_pasajeros())
 auto_var = StringVar()
 auto_var = "Vagon1"
+
+
+
+#         __________________
+#________/Funcion que evalua el select de el automatico
 
 
 def cargarImagen(nombre):
@@ -307,16 +310,23 @@ canvas_v.place(x=0, y=700)
 consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
 consola.place(x=300, y=700)
 
-rutas_title = Label(canvas_r, text='Rutas proximas', bg='red', fg='white', font=("Roboto Slab", 24, "bold"))
+rutas_title = Label(canvas_v, text='Rutas proximas', bg='green', fg='white', font=("Roboto Slab", 24, "bold"))
 rutas_title.place(x=10, y=10)
 
-vagones_title = Label(canvas_v, text='Vagones Disponibles', bg='green', fg='white', font=("Roboto Slab", 20, "bold"))
+rutas_lbl = Label(canvas_v, text="\n".join(map(str, rutas)), bg='green', fg='white', font=("Roboto Slab", 20, "bold"))
+rutas_lbl.place(x=10, y=50)
+
+
+vagones_title = Label(canvas_r, text='Vagones Disponibles', bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
 vagones_title.place(x=10, y=10)
+
+vagones_lbl = Label(canvas_r, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), bg='red', fg='white', font=("Roboto Slab", 20, "bold"))
+vagones_lbl.place(x=10, y=50)
 
 demanda_l = Label(consola,text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_l.place(x=300, y=30)
 
-demanda_var = Label(consola, text=demanda_variable, bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
+demanda_var = Label(consola, textvariable=demanda_variable, bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_var.place(x=520, y=30)
 
 body = 'Segun la demanda el programa selecciono los vagones ' + auto_var + ' para la siguiente salida.' \
@@ -344,7 +354,7 @@ def ventanaManual():
     demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold") )
     demanda_title.place(x=20, y=20)
 
-    demanda = Label(fondo, text=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"))
+    demanda = Label(fondo, textvariable=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"))
     demanda.place(x=20, y=80)
 
     vagones_canvas = Canvas(ventana_manual, width=350, height=300, bg='blue')
@@ -353,7 +363,7 @@ def ventanaManual():
     vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
     vagones_title.place(x=20, y=0)
 
-    vagones = Label(vagones_canvas, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black', font=("Roboto Slab", 22, "bold"))
     vagones.place(x=20, y=60)
 
     shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
@@ -422,8 +432,9 @@ def ventanaManual():
 
     ventana_manual.mainloop()
 
-#        ____________
+#        _______________________________
 #_______/Ventana que realiza el ajuste automatico de los vagones
+radio = IntVar()
 def ventanaAuto():
     ventana_auto = Toplevel()
     ventana_auto.title("Modo Automatico")
@@ -436,7 +447,7 @@ def ventanaAuto():
     demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold"), bg = 'white')
     demanda_title.place(x=20, y=20)
 
-    demanda = Label(fondo, text=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"), bg='white')
+    demanda = Label(fondo, textvariable=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"), bg='white')
     demanda.place(x=80, y=80)
 
     vagones_canvas = Canvas(ventana_auto, width=350, height=300, bg='blue')
@@ -445,24 +456,64 @@ def ventanaAuto():
     vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
     vagones_title.place(x=20, y=0)
 
-    vagones = Label(vagones_canvas, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones.place(x=20, y=60)
+    vagones = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones.place(x=20, y=60)#Arreglar el print
 
     shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
     shell.place(x=385, y=50)
 
-    eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
-    eng_i.place(x=385, y=120)
+    #eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
+    #eng_i.place(x=385, y=120)
 
-    eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
-    eng_m.place(x=585, y=120)
+    #eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
+    #eng_m.place(x=585, y=120)
 
-    eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
-    eng_f.place(x=385, y=250)
+    #eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
+    #eng_f.place(x=385, y=250)
 
-    quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
-    quitar_v.place(x=585, y=250)
+    #quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
+    #quitar_v.place(x=585, y=250)
+
+    """Botones de opciones"""
+
+    RBTren1 = Radiobutton(ventana_auto, text = "Tren 1", variable = radio, bg = 'white',fg='black',
+                          font=("Roboto Slab", 22, "bold"),  value = 1, command = evalua) .place(x=385, y=120)
+    RBTren2 = Radiobutton(ventana_auto, text="Tren 2", variable=radio, bg='white', fg='black',
+                          font=("Roboto Slab", 22, "bold"), value=2,command = evalua).place(x=385, y=160)
+    RBTren3 = Radiobutton(ventana_auto, text="Tren 3", variable=radio, bg='white', fg='black',
+                          font=("Roboto Slab", 22, "bold"), value=3, command = evalua).place(x=385, y=200)
+    RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg='white', fg='black',
+                          font=("Roboto Slab", 22, "bold"), value=4, command = evalua).place(x=385, y=240)
+
+
+def evalua():
+    r = radio.get()
+    if r == 1:
+        tren1.auto(demanda_variable.get())
+        print("Los vagones que tiene el Tren 1 son: ")
+        tren1.printL()
+        actualiza()
+    elif r == 2:
+        tren2.auto(demanda_variable.get())
+        print("Los vagones que tiene el Tren 2 son: ")
+        tren2.printL()
+        actualiza()
+    elif r == 3:
+        tren3.auto(demanda_variable.get())
+        print("Los vagones que tiene el Tren 3 son: ")
+        tren3.printL()
+        actualiza()
+    else:
+        tren4.auto(demanda_variable.get())
+        print("Los vagones que tiene el Tren 4 son: ")
+        tren4.printL()
+        actualiza()
+
+def actualiza():
+    demanda_variable.set(random_pasajeros())
+
+
 
 bgreen = cargarImagen("bgreen.png")
 manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
@@ -477,5 +528,6 @@ auto_b.place(x=1000, y=10)
 
 manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
 manual_l.place(x=1000, y=220)
+
 
 ventana_principal.mainloop()
