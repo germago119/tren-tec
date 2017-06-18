@@ -6,18 +6,18 @@ from tkinter import *
 from threading import Thread
 from tkinter import messagebox
 
-
- #  ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
- #  TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
-
+###############################################################################################
+"""
+_________________________________________________________________________________
+|                            Tercera Tarea Progradamada                          |
+|                              Taller de Programacion                            |
+|          Simulador de estación de trenes del Tecnológico de Costa Rica         |
+|            All Rights Reserved to Kevyn Guadamuz and Roger Valderrama          |
+|________________________________________________________________________________|
+"""
 random.seed()  # Mejora la variabilidad del random
 
-A_TEC = ""
-SJ_TEC = ""
-TEC_SJ = ""
-TEC_A = ""
 sky_blue = "#87ceeb"
-
 
 #               ____________________________
 #______________/
@@ -80,6 +80,7 @@ vagon10 = Vagon(v10[0], v10[1],None,None,v10[2],v10[3])
 
 vagones_a_evaluar=[vagon1,vagon2,vagon3,vagon4,vagon5,vagon6,vagon7,vagon8,vagon9,vagon10]
 ####------------------------------------#####
+
 #          ______________________________
 #_________/Función que realiza una lista con los vagones que se encuentran disponibles
 def vagon_libre(lista):
@@ -113,12 +114,13 @@ class Maquina:
 #         ______________
 #________/Se define la clase Tren
 class Tren:
-    def __init__(self, tren = None, ruta = None, hora = None, num = None):
+    def __init__(self, tren = None, ruta = None, hora = None, num = None, estado = None):
         self.num_tren = tren
         self.ruta = ruta
         self.hora = hora
         self.num_maquina = num
         self.vagones = 0
+        self.estado = estado
         self.head = None
         self.tail = None
 
@@ -224,21 +226,24 @@ class Tren:
 #_____________/ Inicializa las instancias de la clase Tren
 """Lee los archivos de tren desde el archivo .csv"""
 trenes = []
-m3 = open("trenes.csv", "r")
+m3 = open("trenes.csv", "r")#Se lee el archivo CSV
 m3_c = csv.reader(m3)
-for tren, ruta, hora, num in m3_c:
-    trenes.append([tren, ruta, hora, num])
+for tren, ruta, hora, num, estado in m3_c:#Se crea una sublista con los atributos de los trenes
+    trenes.append([tren, ruta, hora, num, estado])
+
 
 t1 = trenes[0]
 t2 = trenes[1]
 t3 = trenes[2]
 t4 = trenes[3]
-"""Inicializa las instancias de los trenes"""
-tren1 = Tren(t1[0],t1[1],t1[2],t1[3])
-tren2 = Tren(t2[0],t2[1],t2[2],t2[3])
-tren3 = Tren(t3[0],t3[1],t3[2],t3[3])
-tren4 = Tren(t4[0],t4[1],t4[2],t4[3])
+t5 = trenes[4]
 
+"""Inicializa las instancias de los trenes"""
+tren1 = Tren(t1[0],t1[1],t1[2],t1[3],t1[4])
+tren2 = Tren(t2[0],t2[1],t2[2],t2[3],t2[4])
+tren3 = Tren(t3[0],t3[1],t3[2],t3[3],t3[4])
+tren4 = Tren(t4[0],t4[1],t4[2],t4[3],t4[4])
+tren5 = Tren(t5[0],t5[1],t5[2],t5[3],t5[4])
 
 
 #           _____________
@@ -483,43 +488,56 @@ def ventanaAuto():
                           font=("Roboto Slab", 22, "bold"), value=3, command = evalua).place(x=385, y=200)
     RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg='white', fg='black',
                           font=("Roboto Slab", 22, "bold"), value=4, command = evalua).place(x=385, y=240)
-
-
+#tren2.estado = "Ocupado"
+print(tren1.estado)
+print(tren2.estado)
+#Funcion que evalua los CheckButton seleccionados
 def evalua():
     r = radio.get()
     a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
-    if r == 1:
-        tren1.auto(demanda_variable.get())
-        print("Los vagones que tiene el Tren 1 son: ")
-        tren1.printL()
+    if r == 1 and tren5.estado == "Libre":
+        tren5.auto(demanda_variable.get())
+        simpledialo("Los vagones que añadieron al Tren 1 son: ", tren5.printL())
+        tren5.printL()
         vagones_lbl.config(text = a)
         ventana_principal.update()
+        verificar_vagones(tren5.vagones)
         actualiza()
-    elif r == 2:
+
+    elif r == 2 and tren2.estado == "Libre":
         tren2.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 2 son: ")
         tren2.printL()
         vagones_lbl.config(text=a)
         ventana_principal.update()
+        verificar_vagones(tren2.vagones)
         actualiza()
-    elif r == 3:
+    elif r == 3 and tren3.estado == "Libre":
         tren3.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 3 son: ")
         tren3.printL()
         vagones_lbl.config(text=a)
         ventana_principal.update()
+        verificar_vagones(tren3.vagones)
         actualiza()
-    else:
+    elif r == 4  and tren4.estado == "Libre":
         tren4.auto(demanda_variable.get())
         print("Los vagones que tiene el Tren 4 son: ")
         tren4.printL()
         vagones_lbl.config(text=a)
         ventana_principal.update()
+        verificar_vagones(tren4.vagones)
         actualiza()
+    else:
+        messagebox.showwarning("Tren no disponible", "El tren que ha seleccionado no se encuentra disponible")
 
 def actualiza():
     demanda_variable.set(random_pasajeros())
 
+
+##-----------------------------------------------------------------------##
+#           ____________
+#__________/Animaciones
 # Trenes
 train_wg1_frames = [['tbk1.png', 'tbk1.1.png', 'tbk1.2.png', 'tbk1.3.png'],
                     ['tr1.png', 'tr1.1.png', 'tr1.2.png', 'tr1.3.png'],
@@ -545,13 +563,13 @@ train_wg3_frames_reverse = [['tbk3r.png', 'tbk3.1r.png', 'tbk3.2r.png', 'tbk3.3r
                             ['tr3r.png', 'tr3.1r.png', 'tr3.2r.png', 'tr3.3r.png'] ,
                             ['tbl3r.png', 'tbl3.1r.png', 'tbl3.2r.png', 'tbl3.3r.png']]
 
-#Arreglar la verificacion de vagones
-def verificar_vagones():
-    if self_vagones == 1:
+#Verifica cuantos vagones tiene el tren para llamar a la animación correspondiente
+def verificar_vagones(vagones):
+    if vagones == 1:
         return right_wg1()
-    if self_vagones == 2:
+    if vagones == 2:
         return right_wg2()
-    if self_vagones == 3:
+    if vagones >= 3:
         return right_wg3()
 
 
@@ -655,5 +673,6 @@ manual_l.place(x=1000, y=220)
 
 
 ventana_principal.mainloop()
+
 
 
