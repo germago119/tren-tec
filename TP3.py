@@ -1128,18 +1128,6 @@ def ventanaManual():
     quitar_v.place(x=585, y=270)
 
 
-    r_manual = IntVar()
-
-    RBTren1 = Radiobutton(ventana_auto, text="Tren 1", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=1, command=evalua).place(x=385, y=120)
-    RBTren2 = Radiobutton(ventana_auto, text="Tren 2", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=2, command=evalua).place(x=385, y=160)
-    RBTren3 = Radiobutton(ventana_auto, text="Tren 3", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=3, command=evalua).place(x=385, y=200)
-    RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=4, command=evalua).place(x=385, y=240)
-
-
     def regresar():
         ventana_manual.destroy()
 
