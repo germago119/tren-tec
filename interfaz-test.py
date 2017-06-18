@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
 from threading import Thread
 import os
 
@@ -32,11 +31,11 @@ tec.place(x=1100, y=200)
 
 frame_rail = cargarImagen("rail.png")
 rail = Label(contenedor_principal, bg='white', image=frame_rail)
-rail.place(x=290, y=460)
+rail.place(x=290, y=600)
 
 gam_frame = cargarImagen("gam2.png")
 gam = Label(contenedor_principal, bg='white', image=gam_frame)
-gam.place(x=300, y=190)
+gam.place(x=300, y=180)
 
 canvas_r = Canvas(ventana_principal, width=300, height=700, bg='red')
 canvas_r.place(x=0, y=0)
@@ -175,5 +174,15 @@ auto_b.place(x=1000, y=10)
 
 manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
 manual_l.place(x=1000, y=220)
+
+# Trenes
+trainbk_frame = cargarImagen('trainblue.png')
+train_bk = Label(contenedor_principal, image=trainbk_frame, bg='#87ceeb')
+train_bk.place(x=300, y=500)
+
+wg1_frame = cargarImagen('wg3.png')
+wg1 = Label(contenedor_principal, image=wg1_frame, bg='#87ceeb')
+wg1.place(x=845, y=500)
+
 
 ventana_principal.mainloop()
