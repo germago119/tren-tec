@@ -376,7 +376,6 @@ def ventanaManual():
     vagones_canvas = Canvas(ventana_manual, width=350, height=500, bg=bg_v_manual)
     vagones_canvas.place(x=0, y=0)
 
-<<<<<<< HEAD
     trenes_title = Label(vagones_canvas, text='Seleccione el tren \na modificar: ', fg='white', font=("Roboto Slab", 22, "bold")
                           , bg=bg_v_manual)
     trenes_title.place(x=50, y=5)
@@ -390,11 +389,7 @@ def ventanaManual():
                           font=("Roboto Slab", 22, "bold"), value=3).place(x=25, y=200)
     RBTren4 = Radiobutton(vagones_canvas, text="Tren 4", variable=radio_manual, bg=bg_v_manual, fg='white',
                           font=("Roboto Slab", 22, "bold"), value=4).place(x=25, y=240)
-=======
-    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='white', font=("Roboto Slab", 22, "bold"),
-                          bg=bg_v_manual)
-    vagones_title.place(x=20, y=0)
->>>>>>> 25940b64a4188c0ae33b8d079b495365dc6e85cb
+
 
 
     shell = Entry(fondo, width=17, bg=bg_entry, fg='white', insertwidth=10, borderwidth=3,
@@ -1132,8 +1127,7 @@ def ventanaManual():
     quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg)
     quitar_v.place(x=585, y=270)
 
-<<<<<<< HEAD
-=======
+
     r_manual = IntVar()
 
     RBTren1 = Radiobutton(ventana_auto, text="Tren 1", variable=radio, bg='white', fg='black',
@@ -1144,7 +1138,7 @@ def ventanaManual():
                           font=("Roboto Slab", 22, "bold"), value=3, command=evalua).place(x=385, y=200)
     RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg='white', fg='black',
                           font=("Roboto Slab", 22, "bold"), value=4, command=evalua).place(x=385, y=240)
->>>>>>> 25940b64a4188c0ae33b8d079b495365dc6e85cb
+
 
     def regresar():
         ventana_manual.destroy()
