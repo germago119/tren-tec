@@ -407,7 +407,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren5.enganchar_i(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -464,7 +463,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren2.enganchar_i(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -521,7 +519,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren3.enganchar_i(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -578,7 +575,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren4.enganchar_i(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -645,7 +641,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren5.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -702,7 +697,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren2.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -759,7 +753,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren3.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -816,7 +809,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2"and vagon2.estado == "Libre":
                 tren4.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -885,7 +877,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
                 tren5.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -942,7 +933,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
                 tren2.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -999,7 +989,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
                 tren3.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
@@ -1056,7 +1045,6 @@ def ventanaManual():
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
-                print("Si entro")
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
                 tren4.enganchar_m(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
