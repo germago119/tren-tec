@@ -226,7 +226,7 @@ class Tren:
 trenes = []
 m3 = open("trenes.csv", "r")
 m3_c = csv.reader(m3)
-for tren,ruta,hora,num in m3_c:
+for tren, ruta, hora, num in m3_c:
     trenes.append([tren, ruta, hora, num])
 
 t1 = trenes[0]
@@ -244,7 +244,7 @@ tren4 = Tren(t4[0],t4[1],t4[2],t4[3])
 #           _____________
 #__________/ Función con el numero aleatorio de pasajeros
 def random_pasajeros():
-    pasa = (random.randrange(1, 1001))
+    pasa = (random.randint(1, 1000))
     print("Random es: ", pasa)
     return pasa
 
@@ -464,18 +464,6 @@ def ventanaAuto():
     shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
     shell.place(x=385, y=50)
-
-    #eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
-    #eng_i.place(x=385, y=120)
-
-    #eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
-    #eng_m.place(x=585, y=120)
-
-    #eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
-    #eng_f.place(x=385, y=250)
-
-    #quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
-    #quitar_v.place(x=585, y=250)
 
     """Botones de opciones"""
 

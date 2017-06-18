@@ -1,14 +1,17 @@
 from tkinter import *
 from threading import Thread
 import os
+import random
 
+self_vagones = 3
+sky_blue = "#87ceeb"
 
 ventana_principal = Tk()
 ventana_principal.title("Estacion TEC")
 ventana_principal.minsize(1560, 1000)
 ventana_principal.resizable(width=NO, height=NO)
 
-contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg="#87ceeb")
+contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg=sky_blue)
 contenedor_principal.place(x=0, y=0)
 
 user_entry = StringVar()
@@ -22,19 +25,22 @@ def cargarImagen(nombre):
     return imagen
 
 irazu_frame = cargarImagen('13.png')
-irazu = Label(contenedor_principal, bg='white', image=irazu_frame)
+irazu = Label(contenedor_principal, bg=sky_blue, image=irazu_frame)
 irazu.place(x=750, y=3)
 
 frame_tec = cargarImagen("tec.png")
-tec = Label(contenedor_principal, bg='white', image=frame_tec)
-tec.place(x=1100, y=200)
+tec = Label(contenedor_principal, bg=sky_blue, image=frame_tec)
+tec.place(x=1105, y=185)
 
 frame_rail = cargarImagen("rail.png")
 rail = Label(contenedor_principal, bg='white', image=frame_rail)
 rail.place(x=290, y=600)
 
-gam_frame = cargarImagen("gam2.png")
-gam = Label(contenedor_principal, bg='white', image=gam_frame)
+rail_2 = Label(contenedor_principal, bg='white', image=frame_rail)
+rail_2.place(x=1090, y=600)
+
+gam_frame = cargarImagen("gam.png")
+gam = Label(contenedor_principal, bg=sky_blue, image=gam_frame)
 gam.place(x=300, y=180)
 
 canvas_r = Canvas(ventana_principal, width=300, height=700, bg='red')
@@ -52,7 +58,7 @@ rutas_title.place(x=10, y=10)
 vagones_title = Label(canvas_v, text='Vagones Disponibles', bg='green', fg='white', font=("Roboto Slab", 20, "bold"))
 vagones_title.place(x=10, y=10)
 
-demanda_l = Label(consola,text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
+demanda_l = Label(consola, text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_l.place(x=300, y=30)
 
 demanda_var = Label(consola, text="Variable", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
@@ -161,6 +167,126 @@ def ventanaManual():
     ventana_manual.mainloop()
 
 
+# Trenes
+train_wg1_frames = [['tbk1.png', 'tbk1.1.png', 'tbk1.2.png', 'tbk1.3.png'],
+                    ['tr1.png', 'tr1.1.png', 'tr1.2.png', 'tr1.3.png'],
+                    ['tbl1.png', 'tbl1.1.png', 'tbl1.2.png', 'tbl1.3.png']]
+
+train_wg2_frames = [['tbk2.png', 'tbk2.1.png', 'tbk2.2.png', 'tbk2.3.png'],
+                    ['tr2.png', 'tr2.1.png', 'tr2.2.png', 'tr2.3.png'],
+                    ['tbl2.png', 'tbl2.1.png', 'tbl2.2.png', 'tbl2.3.png']]
+
+train_wg3_frames = [['tbk3.png', 'tbk3.1.png', 'tbk3.2.png', 'tbk3.3.png'],
+                    ['tr3.png', 'tr3.1.png', 'tr3.2.png', 'tr3.3.png'],
+                    ['tbl3.png', 'tbl3.1.png', 'tbl3.2.png', 'tbl3.3.png']]
+
+train_wg1_frames_reverse = [['tbk1r.png', 'tbk1.1r.png', 'tbk1.2r.png', 'tbk1.3r.png'],
+                          ['tr1r.png', 'tr1.1r.png', 'tr1.2r.png', 'tr1.3r.png'],
+                          ['tbl1r.png', 'tbl1.1r.png', 'tbl1.2r.png', 'tbl1.3r.png']]
+
+train_wg2_frames_reverse = [['tbk2r.png', 'tbk2.1r.png', 'tbk2.2r.png', 'tbk2.3r.png'],
+                           ['tr2r.png', 'tr2.1r.png', 'tr2.2r.png', 'tr2.3r.png'],
+                           ['tbl2r.png', 'tbl2.1r.png', 'tbl2.2r.png', 'tbl2.3r.png']]
+
+train_wg3_frames_reverse = [['tbk3r.png', 'tbk3.1r.png', 'tbk3.2r.png', 'tbk3.3r.png'],
+                            ['tr3r.png', 'tr3.1r.png', 'tr3.2r.png', 'tr3.3r.png'] ,
+                            ['tbl3r.png', 'tbl3.1r.png', 'tbl3.2r.png', 'tbl3.3r.png']]
+
+
+def verificar_vagones():
+    if self_vagones == 1:
+        return right_wg1()
+    if self_vagones == 2:
+        return right_wg2()
+    if self_vagones == 3:
+        return right_wg3()
+
+
+def right_wg1():
+   tren = random.randint(0, 2)
+   vagon = random.randint(0,3)
+   x_tren = 1600
+   frame = cargarImagen(train_wg1_frames[tren][vagon])
+   tren_l = Label(contenedor_principal, bg=sky_blue, image=frame)
+   while True:
+        tren_l.place(x=x_tren, y=502)
+        x_tren -= 5
+        if x_tren < -200:
+            break
+        ventana_principal.update()
+
+
+def right_wg2():
+   tren = random.randint(0, 2)
+   vagon = random.randint(0,3)
+   x_tren = 1620
+   frame = cargarImagen(train_wg2_frames[tren][vagon])
+   tren_l = Label(contenedor_principal, bg=sky_blue, image=frame)
+   while True:
+        tren_l.place(x=x_tren, y=502)
+        x_tren -= 6
+        if x_tren < -400:
+            break
+        ventana_principal.update()
+
+
+def right_wg3():
+   tren = random.randint(0, 2)
+   vagon = random.randint(0,3)
+   x_tren = 1620
+   frame = cargarImagen(train_wg3_frames[tren][vagon])
+   tren_l = Label(contenedor_principal, bg=sky_blue, image=frame)
+   while True:
+        tren_l.place(x=x_tren, y=502)
+        x_tren -= 7
+        if x_tren < -600:
+            break
+        ventana_principal.update()
+
+
+def left_wg1():
+   tren = random.randint(0, 2)
+   vagon = random.randint(0,3)
+   x_tren = -300
+   frame = cargarImagen(train_wg1_frames_reverse[tren][vagon])
+   tren_l = Label(contenedor_principal, bg=sky_blue, image=frame)
+   while True:
+        tren_l.place(x=x_tren, y=502)
+        x_tren += 5
+        if x_tren > 1650:
+            break
+        ventana_principal.update()
+
+
+def left_wg2():
+   tren = random.randint(0, 2)
+   vagon = random.randint(0,3)
+   x_tren = -400
+   frame = cargarImagen(train_wg2_frames_reverse[tren][vagon])
+   tren_l = Label(contenedor_principal, bg=sky_blue, image=frame)
+   while True:
+        tren_l.place(x=x_tren, y=502)
+        x_tren += 6
+        if x_tren > 1650:
+            break
+        ventana_principal.update()
+
+
+def left_wg3():
+   tren = random.randint(0, 2)
+   vagon = random.randint(0,3)
+   x_tren = -630
+   frame = cargarImagen(train_wg3_frames_reverse[tren][vagon])
+   tren_l = Label(contenedor_principal, bg=sky_blue, image=frame)
+   while True:
+        tren_l.place(x=x_tren, y=502)
+        x_tren += 7
+        if x_tren > 1650:
+            break
+        ventana_principal.update()
+
+
+
 bgreen = cargarImagen("bgreen.png")
 manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
 manual_b.place(x=20, y=10)
@@ -169,20 +295,10 @@ manual_l = Label(consola, text="Manual", bg="gray", fg='white', font=("Roboto Sl
 manual_l.place(x=60, y=220)
 
 bblue = cargarImagen("bblue.png")
-auto_b = Button(consola, image=bblue, command=ventanaManual, bg='gray')
+auto_b = Button(consola, image=bblue, command=verificar_vagones, bg='gray')
 auto_b.place(x=1000, y=10)
 
 manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
 manual_l.place(x=1000, y=220)
-
-# Trenes
-trainbk_frame = cargarImagen('trainblue.png')
-train_bk = Label(contenedor_principal, image=trainbk_frame, bg='#87ceeb')
-train_bk.place(x=300, y=500)
-
-wg1_frame = cargarImagen('wg3.png')
-wg1 = Label(contenedor_principal, image=wg1_frame, bg='#87ceeb')
-wg1.place(x=845, y=500)
-
 
 ventana_principal.mainloop()
