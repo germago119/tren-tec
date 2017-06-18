@@ -4,6 +4,8 @@ import random
 import csv
 from tkinter import *
 from threading import Thread
+from tkinter import messagebox
+
 
  #  ANTES DE HACER INTERFAZ Y PENSAR SOBRE TKINTER O PYGAME HAGAMOS TODA LA LOGICA DE PUNTEROS PRIMERO Y TRATAEMOS DE
  #  TERMIANR ESTO ANTES DEL VIERNES PARA TENER LA OTRA SEMANA SOLO PARA INTERFAZ Y ANIMACIONES...
@@ -78,28 +80,28 @@ vagon10 = Vagon(v10[0], v10[1],None,None,v10[2],v10[3])
 
 vagones_a_evaluar=[vagon1,vagon2,vagon3,vagon4,vagon5,vagon6,vagon7,vagon8,vagon9,vagon10]
 ####------------------------------------#####
-
 #          ______________________________
 #_________/Función que realiza una lista con los vagones que se encuentran disponibles
 def vagon_libre(lista):
     vagones_libres = []
     for i in range(len(lista)):
         temp = lista[i]
-        if temp.estado == 'Libre':
+        if temp.estado == "Libre":
             vagones_libres += [temp]
+            print(temp.nombre)
     return vagones_libres
 #####--------------------------------#####
 
 #           ___________________
 #__________/Función que Imprime el nombre y la capacidad de los vagones disponibles
 
-para_print= vagon_libre(vagones_a_evaluar) #Variable para que se use para printear los vagones disponibles
+mierdas = vagon_libre(vagones_a_evaluar)#Variable para que se use para printear los vagones disponibles
 def print_nombres(lista):
     nombre_disponibles = []
     for i in range(len(lista)):
         temp = lista[i]
         nombre_disponibles.append([temp.nombre, temp.capacidad_p])
-    print(nombre_disponibles)
+    return nombre_disponibles
 
 #def print_rutas(ruta)
 
@@ -111,7 +113,7 @@ class Maquina:
         self.capacidad_v = capacidad_v
 
 class Tren:
-    def __init__(self, tren, ruta, hora, num):
+    def __init__(self, tren = None, ruta = None, hora = None, num = None):
         self.num_tren = tren
         self.ruta = ruta
         self.hora = hora
@@ -197,19 +199,17 @@ class Tren:
                 break
             elif self.vagones == 0:
                 self.enganchar_i(temp[i].num_vagon)
-                temp[i].estado = "Ocupado"
+                temp[i].estado = 'Ocupado'
                 prueba += [temp[i].num_vagon]
                 conta += int(temp[i].capacidad_p)
                 i += 1
-
-
             else:
                 self.enganchar_f(temp[i].num_vagon)
-                temp[i].estado = "Ocupado"
+                temp[i].estado = 'Ocupado'
                 prueba += [temp[i].num_vagon]
                 conta += int(temp[i].capacidad_p)
                 i += 1
-        print(prueba)
+        #print(prueba)
 
     #def exit(self):
         #self._del_()
@@ -220,11 +220,34 @@ class Tren:
 
 
 
+#              _________________
+#_____________/ Inicializa las instancias de la clase Tren
+"""Lee los archivos de tren desde el archivo .csv"""
+trenes = []
+m3 = open("trenes.csv", "r")
+m3_c = csv.reader(m3)
+for tren,ruta,hora,num in m3_c:
+    trenes.append([tren, ruta, hora, num])
+
+t1 = trenes[0]
+t2 = trenes[1]
+t3 = trenes[2]
+t4 = trenes[3]
+"""Inicializa las instancias de los trenes"""
+tren1 = Tren(t1[0],t1[1],t1[2],t1[3])
+tren2 = Tren(t2[0],t2[1],t2[2],t2[3])
+tren3 = Tren(t3[0],t3[1],t3[2],t3[3])
+tren4 = Tren(t4[0],t4[1],t4[2],t4[3])
+
+
+
 #           _____________
 #__________/ Función con el numero aleatorio de pasajeros
 def random_pasajeros():
-    pasa = (random.randrange(0, 101))
+    pasa = (random.randrange(0, 401))
+    print("Random es: ", pasa)
     return pasa
+
 
 
 
@@ -235,62 +258,224 @@ def cargarImagen(nombre):#Función para cargar las imágenes
     imagen = PhotoImage(file=ruta)
     return imagen
 
-root = Tk()
-root.title("Estacion de Tren del TEC")
-root.minsize(1100, 900)
-canvas_fondo = Canvas(root, width = 1100, height = 900, bg = "#000000" )
-canvas_fondo.place(x=0, y = 0)
 
 
-fondo = cargarImagen("estacion.png")
-lbl_fondo = Label(canvas_fondo, bg='white')
-lbl_fondo.config(image=fondo)
-lbl_fondo.place(x=0, y=0)
+#               ___________________
+#______________/Interfaz Grafica
+ventana_principal = Tk()
+ventana_principal.title("Estacion TEC")
+ventana_principal.minsize(1560, 1000)
+ventana_principal.resizable(width=NO, height=NO)
 
-lbl_rutas= Label(root, text = "Rutas Disponibles", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
-lbl_rutas.pack()
-lbl_rutas.place(x= 825, y = 150)
-lbl_a_tec = Label(root, text = "Alajuela-TEC", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
-lbl_a_tec.pack()
-lbl_a_tec.place(x= 825, y = 200)
-lbl_sj_tec = Label(root, text = "San Jose-TEC", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
-lbl_sj_tec.pack()
-lbl_sj_tec.place(x= 825, y = 250)
-lbl_tec_a = Label(root, text = "TEC-Alajuela", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
-lbl_tec_a.pack()
-lbl_tec_a.place(x= 825, y = 300)
-lbl_tec_sj = Label(root, text = "TEC-San Jose", font=("Comic Sans MS", 18), bg= "grey", fg = "white")
-lbl_tec_sj.pack()
-lbl_tec_sj.place(x= 825, y = 350)
+contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg="#87ceeb")
+contenedor_principal.place(x=0, y=0)
 
-#               _________________________
-#______________/Animacion del Reloj
-"""clock = Label(root, font=('Consolas', 40), bg="Black", fg="green")
-clock.pack()
-clock.place (x=800, y=70)
-time1 = ""
-def reloj ():
-    global time1
-    time2 = time.strftime ('%H:%M:%S')
-    if time2 != time1:
-        time1 = time2
-        clock.configure (text=time2)
-    clock.after(500,reloj)
-
-a = Thread(target = reloj, args = ())
-a.start()"""
-#-----------------------------------------------#
+user_entry = StringVar()
+demanda_variable = StringVar()
+demanda_variable = random_pasajeros()
+auto_var = StringVar()
+auto_var = "Vagon1"
 
 
-"""x = Tren("thomas","s-c", 13, 2)
-x.printL()
-x.auto(100)
-x.printL()
-b = Tren("Ricardo","s-c", 13, 2)
-b.auto(100)
-b.printL()
-a = Tren("Lola", "SS", 13, 2)
-a.auto(600)"""
-print(print_nombres(vagon_libre(vagones_a_evaluar)))
+def cargarImagen(nombre):
+    ruta = os.path.join('Imagenes', nombre)
+    imagen = PhotoImage(file=ruta)
+    return imagen
 
-root.mainloop()
+irazu_frame = cargarImagen('13.png')
+irazu = Label(contenedor_principal, bg='white', image=irazu_frame)
+irazu.place(x=750, y=3)
+
+frame_tec = cargarImagen("tec.png")
+tec = Label(contenedor_principal, bg='white', image=frame_tec)
+tec.place(x=1100, y=200)
+
+frame_rail = cargarImagen("rail.png")
+rail = Label(contenedor_principal, bg='white', image=frame_rail)
+rail.place(x=290, y=460)
+
+gam_frame = cargarImagen("gam2.png")
+gam = Label(contenedor_principal, bg='white', image=gam_frame)
+gam.place(x=300, y=190)
+
+canvas_r = Canvas(ventana_principal, width=300, height=700, bg='red')
+canvas_r.place(x=0, y=0)
+
+canvas_v = Canvas(ventana_principal, width=300, height=300, bg='green')
+canvas_v.place(x=0, y=700)
+
+consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
+consola.place(x=300, y=700)
+
+rutas_title = Label(canvas_r, text='Rutas proximas', bg='red', fg='white', font=("Roboto Slab", 24, "bold"))
+rutas_title.place(x=10, y=10)
+
+vagones_title = Label(canvas_v, text='Vagones Disponibles', bg='green', fg='white', font=("Roboto Slab", 20, "bold"))
+vagones_title.place(x=10, y=10)
+
+demanda_l = Label(consola,text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
+demanda_l.place(x=300, y=30)
+
+demanda_var = Label(consola, text=demanda_variable, bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
+demanda_var.place(x=520, y=30)
+
+body = 'Segun la demanda el programa selecciono los vagones ' + auto_var + ' para la siguiente salida.' \
+                        ' Si desea puede escoger los vagones de forma manual o permiterle la salida del tren asi.'
+
+message = Text(consola, height=9, width=87)
+message.insert(END, body)
+message.config(wrap=WORD)
+message.tag_add("Body", 1.0, 99.9)
+message.tag_config("Body", background='grey', foreground='white', font=("Roboto Slab", 20))
+message.config(state=DISABLED)
+message.place(x=270, y=110)
+
+#        _________
+#_______/Ventana para ingresar los vagones manualmente
+def ventanaManual():
+    ventana_manual = Toplevel()
+    ventana_manual.title("Modo Manual")
+    ventana_manual.minsize(800, 500)
+    ventana_manual.resizable(width=NO, height=NO)
+
+    fondo = Canvas(ventana_manual, width=800, height=500, bg="white")
+    fondo.place(x=0, y=0)
+
+    demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold") )
+    demanda_title.place(x=20, y=20)
+
+    demanda = Label(fondo, text=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"))
+    demanda.place(x=20, y=80)
+
+    vagones_canvas = Canvas(ventana_manual, width=350, height=300, bg='blue')
+    vagones_canvas.place(x=0, y=200)
+
+    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones_title.place(x=20, y=0)
+
+    vagones = Label(vagones_canvas, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones.place(x=20, y=60)
+
+    shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
+                  font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
+    shell.place(x=385, y=50)
+
+    eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
+    eng_i.place(x=385, y=120)
+
+    eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
+    eng_m.place(x=585, y=120)
+
+    eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
+    eng_f.place(x=385, y=250)
+
+    quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
+    quitar_v.place(x=585, y=250)
+
+
+    def regresar():
+        ventana_manual.destroy()
+
+    def VentanaHelp():
+        ventanahelp = Toplevel()
+        ventanahelp.title("Help")
+        ventanahelp.minsize(200, 200)
+        ventanahelp.resizable(width=NO, height=NO)
+
+        S = Scrollbar(ventanahelp)
+        help_text = Text(ventanahelp, width=100, height=30)
+        S.pack(side=RIGHT, fill=Y)
+        help_text.pack(side=LEFT, fill=Y)
+        S.config(command=help_text.yview)
+        help_text.config(yscrollcommand=S.set)
+
+        body = "Bienvenido a la ventana de ayuda del modo Manual.\n\nEn el cuadro de entrada de texto se deben escribir " \
+               "el nombre de alguno de los vagones disponibles que se encuntran en cuadro izquierdo y presionar alguno " \
+               "de los siguientes botones: " \
+               "\nNote que se debe escribir EXACTAMENTE el nombre del vagon a como se muestra en el cuadro " \
+               "de vagones disponibles." \
+               "\n\nBotones: \n\nEnganchar al inicio: Se agrega el vagon escrito en la entrada de texto al inicio del tren." \
+               "\nEnganchar en el medio: Se agrega el vagon escrito en la entrada de texto en el medio del tren. " \
+               "\nEnganchar al final: Se agrega el vagon escrito en la entrada de texto al final del tren. " \
+               "\nQuitar vagon: Se libera el vagon escrito en la entrada de texto del tren."
+
+        #           ____________________________
+        # __________/ Se crean tags para darle formato al contenido de la pantalla de Ayuda
+        help_text.insert(END, body)
+        help_text.config(wrap=WORD)
+        help_text.tag_add("Body", 1.0, 99.9)
+        help_text.tag_config("Body", font=("Roboto Slab", 20))
+        help_text.config(state=DISABLED)
+
+
+        ventanahelp.mainloop()
+
+    imagenvolverbk = cargarImagen("exit.png")
+    botonvolver = Button(fondo, image=imagenvolverbk, command=regresar, fg="#000000", bg="#00cc00",
+                         activebackground="#cc2900")
+    botonvolver.place(x=710, y=420)
+
+    imagenhelp = cargarImagen("help.png")
+    botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg="#00cc00",
+                       fg="#000000", activebackground="#cc2900")
+    botonhelp.place(x=610, y=420)
+
+    ventana_manual.mainloop()
+
+#        ____________
+#_______/Ventana que realiza el ajuste automatico de los vagones
+def ventanaAuto():
+    ventana_auto = Toplevel()
+    ventana_auto.title("Modo Automatico")
+    ventana_auto.minsize(800, 500)
+    ventana_auto.resizable(width=NO, height=NO)
+
+    fondo = Canvas(ventana_auto, width=800, height=500, bg="white")
+    fondo.place(x=0, y=0)
+
+    demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold"), bg = 'white')
+    demanda_title.place(x=20, y=20)
+
+    demanda = Label(fondo, text=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"), bg='white')
+    demanda.place(x=80, y=80)
+
+    vagones_canvas = Canvas(ventana_auto, width=350, height=300, bg='blue')
+    vagones_canvas.place(x=0, y=200)
+
+    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones_title.place(x=20, y=0)
+
+    vagones = Label(vagones_canvas, text="Vagones aqui", fg='black', font=("Roboto Slab", 22, "bold"))
+    vagones.place(x=20, y=60)
+
+    shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
+                  font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
+    shell.place(x=385, y=50)
+
+    eng_i = Button(fondo, bg='white', fg='black', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"))
+    eng_i.place(x=385, y=120)
+
+    eng_m = Button(fondo, bg='white', fg='black', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"))
+    eng_m.place(x=585, y=120)
+
+    eng_f = Button(fondo, bg='white', fg='black', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"))
+    eng_f.place(x=385, y=250)
+
+    quitar_v = Button(fondo, bg='white', fg='black', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"))
+    quitar_v.place(x=585, y=250)
+
+bgreen = cargarImagen("bgreen.png")
+manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
+manual_b.place(x=20, y=10)
+
+manual_l = Label(consola, text="Manual", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
+manual_l.place(x=60, y=220)
+
+bblue = cargarImagen("bblue.png")
+auto_b = Button(consola, image=bblue, command=ventanaAuto, bg='gray')
+auto_b.place(x=1000, y=10)
+
+manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
+manual_l.place(x=1000, y=220)
+
+ventana_principal.mainloop()
