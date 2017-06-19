@@ -1,2 +1,0 @@
-Hola mundo
-Esta es mi prueba para la lectura de archivos
