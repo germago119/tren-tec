@@ -1483,7 +1483,7 @@ def ventanaManual():
     botonhelp.place(x=440, y=425)
 
 
-
+    ventana_manual.lift()
     ventana_manual.mainloop()
 
 
