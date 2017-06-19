@@ -396,7 +396,7 @@ def ventanaManual():
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
     shell.place(x=385, y=70)
 
-
+#-------------------------------------------------------------------------------------------------------------------------#
     """Funcion que verifica el comando del boton enganchar al inicio"""
     def verifica_manual_inicio():
         rm = radio_manual.get()
@@ -873,52 +873,52 @@ def ventanaManual():
         a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
         if rm == 1 and tren5.estado == "Libre":
             if shell.get() == "vagon1" and vagon1.estado == "Libre":
-                tren5.enganchar_f(vagon1.num_vagon)
+                tren5.enganchar_f(vagon2.num_vagon)
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
-                tren5.enganchar_m(vagon2.num_vagon)
+                tren5.enganchar_f(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon3" and vagon3.estado == "Libre":
-                tren5.enganchar_m(vagon3.num_vagon)
+                tren5.enganchar_f(vagon3.num_vagon)
                 vagon3.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon4" and vagon4.estado == "Libre":
-                tren5.enganchar_m(vagon4.num_vagon)
+                tren5.enganchar_f(vagon4.num_vagon)
                 vagon4.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon5" and vagon5.estado == "Libre":
-                tren5.enganchar_m(vagon5.num_vagon)
+                tren5.enganchar_f(vagon5.num_vagon)
                 vagon5.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon6" and vagon6.estado == "Libre":
-                tren5.enganchar_m(vagon6.num_vagon)
+                tren5.enganchar_f(vagon6.num_vagon)
                 vagon6.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon7" and vagon7.estado == "Libre":
-                tren5.enganchar_m(vagon7.num_vagon)
+                tren5.enganchar_f(vagon7.num_vagon)
                 vagon7.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon8" and vagon8.estado == "Libre":
-                tren5.enganchar_m(vagon8.num_vagon)
+                tren5.enganchar_f(vagon8.num_vagon)
                 vagon8.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon9" and vagon9.estado == "Libre":
-                tren5.enganchar_m(vagon9.num_vagon)
+                tren5.enganchar_f(vagon9.num_vagon)
                 vagon9.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon10" and vagon10.estado == "Libre":
-                tren5.enganchar_m(vagon10.num_vagon)
+                tren5.enganchar_f(vagon10.num_vagon)
                 vagon10.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
@@ -929,52 +929,52 @@ def ventanaManual():
                                                                "o el vagon seleccionado se encuentra ocupado")
         elif rm == 2 and tren2.estado == "Libre":
             if shell.get() == "vagon1" and vagon1.estado == "Libre":
-                tren2.enganchar_m(vagon1.num_vagon)
+                tren2.enganchar_f(vagon1.num_vagon)
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
-                tren2.enganchar_m(vagon2.num_vagon)
+                tren2.enganchar_f(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon3" and vagon3.estado == "Libre":
-                tren2.enganchar_m(vagon3.num_vagon)
+                tren2.enganchar_f(vagon3.num_vagon)
                 vagon3.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon4" and vagon4.estado == "Libre":
-                tren2.enganchar_m(vagon4.num_vagon)
+                tren2.enganchar_f(vagon4.num_vagon)
                 vagon4.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon5" and vagon5.estado == "Libre":
-                tren2.enganchar_m(vagon5.num_vagon)
+                tren2.enganchar_f(vagon5.num_vagon)
                 vagon5.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon6" and vagon6.estado == "Libre":
-                tren2.enganchar_m(vagon6.num_vagon)
+                tren2.enganchar_f(vagon6.num_vagon)
                 vagon6.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon7" and vagon7.estado == "Libre":
-                tren2.enganchar_i(vagon7.num_vagon)
+                tren2.enganchar_f(vagon7.num_vagon)
                 vagon7.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon8" and vagon8.estado == "Libre":
-                tren2.enganchar_m(vagon8.num_vagon)
+                tren2.enganchar_f(vagon8.num_vagon)
                 vagon8.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon9" and vagon9.estado == "Libre":
-                tren2.enganchar_m(vagon9.num_vagon)
+                tren2.enganchar_f(vagon9.num_vagon)
                 vagon9.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon10" and vagon10.estado == "Libre":
-                tren2.enganchar_m(vagon10.num_vagon)
+                tren2.enganchar_f(vagon10.num_vagon)
                 vagon10.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
@@ -985,52 +985,52 @@ def ventanaManual():
                                                                "o el vagon seleccionado se encuentra ocupado")
         elif rm == 3 and tren3.estado == "Libre":
             if shell.get() == "vagon1" and vagon1.estado == "Libre":
-                tren3.enganchar_m(vagon1.num_vagon)
+                tren3.enganchar_f(vagon1.num_vagon)
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
-                tren3.enganchar_m(vagon2.num_vagon)
+                tren3.enganchar_f(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon3" and vagon3.estado == "Libre":
-                tren3.enganchar_m(vagon3.num_vagon)
+                tren3.enganchar_f(vagon3.num_vagon)
                 vagon3.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon4" and vagon4.estado == "Libre":
-                tren3.enganchar_m(vagon4.num_vagon)
+                tren3.enganchar_f(vagon4.num_vagon)
                 vagon4.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon5" and vagon5.estado == "Libre":
-                tren3.enganchar_m(vagon5.num_vagon)
+                tren3.enganchar_f(vagon5.num_vagon)
                 vagon5.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon6" and vagon6.estado == "Libre":
-                tren3.enganchar_m(vagon6.num_vagon)
+                tren3.enganchar_f(vagon6.num_vagon)
                 vagon6.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon7" and vagon7.estado == "Libre":
-                tren3.enganchar_m(vagon7.num_vagon)
+                tren3.enganchar_f(vagon7.num_vagon)
                 vagon7.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon8" and vagon8.estado == "Libre":
-                tren3.enganchar_m(vagon8.num_vagon)
+                tren3.enganchar_f(vagon8.num_vagon)
                 vagon8.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon9" and vagon9.estado == "Libre":
-                tren3.enganchar_m(vagon9.num_vagon)
+                tren3.enganchar_f(vagon9.num_vagon)
                 vagon9.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon10" and vagon10.estado == "Libre":
-                tren3.enganchar_m(vagon10.num_vagon)
+                tren3.enganchar_f(vagon10.num_vagon)
                 vagon10.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
@@ -1041,42 +1041,42 @@ def ventanaManual():
                                                                "o el vagon seleccionado se encuentra ocupado")
         elif rm == 4 and tren4.estado == "Libre":
             if shell.get() == "vagon1" and vagon1.estado == "Libre":
-                tren4.enganchar_m(vagon1.num_vagon)
+                tren4.enganchar_f(vagon1.num_vagon)
                 vagon1.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon2" and vagon2.estado == "Libre":
-                tren4.enganchar_m(vagon2.num_vagon)
+                tren4.enganchar_f(vagon2.num_vagon)
                 vagon2.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon3" and vagon3.estado == "Libre":
-                tren4.enganchar_m(vagon3.num_vagon)
+                tren4.enganchar_f(vagon3.num_vagon)
                 vagon3.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon4" and vagon4.estado == "Libre":
-                tren4.enganchar_m(vagon4.num_vagon)
+                tren4.enganchar_f(vagon4.num_vagon)
                 vagon4.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon5" and vagon5.estado == "Libre":
-                tren4.enganchar_m(vagon5.num_vagon)
+                tren4.enganchar_f(vagon5.num_vagon)
                 vagon5.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon6" and vagon6.estado == "Libre":
-                tren4.enganchar_m(vagon6.num_vagon)
+                tren4.enganchar_f(vagon6.num_vagon)
                 vagon6.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon7" and vagon7.estado == "Libre":
-                tren4.enganchar_m(vagon7.num_vagon)
+                tren4.enganchar_f(vagon7.num_vagon)
                 vagon7.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
             elif shell.get() == "vagon8" and vagon8.estado == "Libre":
-                tren4.enganchar_m(vagon8.num_vagon)
+                tren4.enganchar_f(vagon8.num_vagon)
                 vagon8.estado = "Ocupado"
                 vagones_lbl.config(text=a)
                 ventana_principal.update()
@@ -1100,6 +1100,241 @@ def ventanaManual():
             ventana_principal.update()
             messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible")
 
+    #---------------------------------------------------------------------------------------------------------------#
+
+    def quitar_vagon():
+        rm = radio_manual.get()
+        a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
+        if rm == 1 and tren5.estado == "Libre":
+            if shell.get() == "vagon1" and vagon1.estado == "Ocupado":
+                tren5.remove(1)
+                vagon1.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon2" and vagon2.estado == "Ocupado":
+                tren5.remove(2)
+                vagon2.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon3" and vagon3.estado == "Ocupado":
+                tren5.remove(3)
+                vagon3.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon4" and vagon4.estado == "Ocupado":
+                tren5.remove(4)
+                vagon4.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon5" and vagon5.estado == "Ocupado":
+                tren5.remove(5)
+                vagon5.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon6" and vagon6.estado == "Ocupado":
+                tren5.remove(6)
+                vagon6.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon7" and vagon7.estado == "Ocupado":
+                tren5.remove(7)
+                vagon7.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon8" and vagon8.estado == "Ocupado":
+                tren5.remove(8)
+                vagon8.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon9" and vagon9.estado == "Ocupado":
+                tren5.remove(9)
+                vagon9.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon10" and vagon10.estado == "Ocupado":
+                tren5.remove(10)
+                vagon10.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            else:
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+                messagebox.showerror("No seleccionó un vágon", "Por favor escriba el vagón a utilizar \n"
+                                                               "o el vagon seleccionado se encuentra libre")
+        elif rm == 2 and tren2.estado == "Libre":
+            if shell.get() == "vagon1" and vagon1.estado == "Ocupado":
+                tren2.remove(1)
+                vagon1.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon2" and vagon2.estado == "Ocupado":
+                tren2.remove(2)
+                vagon2.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon3" and vagon3.estado == "Ocupado":
+                tren2.remove(3)
+                vagon3.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon4" and vagon4.estado == "Ocupado":
+                tren2.remove(4)
+                vagon4.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon5" and vagon5.estado == "Ocupado":
+                tren2.remove(5)
+                vagon5.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon6" and vagon6.estado == "Ocupado":
+                tren2.remove(6)
+                vagon6.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon7" and vagon7.estado == "Ocupado":
+                tren2.remove(7)
+                vagon7.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon8" and vagon8.estado == "Ocupado":
+                tren2.remove(8)
+                vagon8.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon9" and vagon9.estado == "Ocupado":
+                tren2.remove(9)
+                vagon9.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon10" and vagon10.estado == "Ocupado":
+                tren2.remove(10)
+                vagon10.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            else:
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+                messagebox.showerror("No seleccionó un vágon", "Por favor escriba el vagón a utilizar \n"
+                                                               "o el vagon seleccionado se encuentra ocupado")
+        elif rm == 3 and tren3.estado == "Libre":
+            if shell.get() == "vagon1" and vagon1.estado == "Ocupado":
+                tren3.remove(1)
+                vagon1.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon2" and vagon2.estado == "Ocupado":
+                tren3.remove(2)
+                vagon2.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon3" and vagon3.estado == "Ocupado":
+                tren3.remove(3)
+                vagon3.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon4" and vagon4.estado == "Ocupado":
+                tren3.remove(4)
+                vagon4.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon5" and vagon5.estado == "Ocupado":
+                tren3.remove(5)
+                vagon5.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon6" and vagon6.estado == "Ocupado":
+                tren3.remove(6)
+                vagon6.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon7" and vagon7.estado == "Ocupado":
+                tren3.remove(7)
+                vagon7.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon8" and vagon8.estado == "Ocupado":
+                tren3.remove(8)
+                vagon8.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon9" and vagon9.estado == "Ocupado":
+                tren3.remove(9)
+                vagon9.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon10" and vagon10.estado == "Ocupado":
+                tren3.remove(10)
+                vagon10.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            else:
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+                messagebox.showerror("No seleccionó un vágon", "Por favor escriba el vagón a utilizar \n"
+                                                               "o el vagon seleccionado se encuentra ocupado")
+        elif rm == 4 and tren4.estado == "Libre":
+            if shell.get() == "vagon1" and vagon1.estado == "Ocupado":
+                tren4.remove(1)
+                vagon1.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon2" and vagon2.estado == "Ocupado":
+                tren4.remove(2)
+                vagon2.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon3" and vagon3.estado == "Ocupado":
+                tren4.remove(3)
+                vagon3.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon4" and vagon4.estado == "Ocupado":
+                tren4.remove(4)
+                vagon4.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon5" and vagon5.estado == "Ocupado":
+                tren4.remove(5)
+                vagon5.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon6" and vagon6.estado == "Ocupado":
+                tren4.remove(6)
+                vagon6.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon7" and vagon7.estado == "Ocupado":
+                tren4.remove(7)
+                vagon7.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon8" and vagon8.estado == "Ocupado":
+                tren4.remove(8)
+                vagon8.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon9" and vagon9.estado == "Ocupado":
+                tren4.remove(9)
+                vagon9.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            elif shell.get() == "vagon10" and vagon10.estado == "Ocupado":
+                tren4.remove(10)
+                vagon10.estado = "Libre"
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+            else:
+                vagones_lbl.config(text=a)
+                ventana_principal.update()
+                messagebox.showerror("No seleccionó un vágon", "Por favor escriba el vagón a utilizar \n"
+                                                               "o el vagon seleccionado se encuentra ocupado")
+        else:
+            vagones_lbl.config(text=a)
+            ventana_principal.update()
+            messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible")
+
+
     # ----------------------------------------------------------------------------------------------------------------#
 
 
@@ -1112,7 +1347,7 @@ def ventanaManual():
     eng_f = Button(fondo, fg='white', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"), bg=bg, command = verifica_manual_final)
     eng_f.place(x=385, y=270)
 
-    quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg)
+    quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg, command = quitar_vagon)
     quitar_v.place(x=585, y=270)
 
 
