@@ -1799,7 +1799,8 @@ manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Robot
 manual_l.place(x=1000, y=220)
 
 #Boton de RESET
-refresh_b = Button(ventana_principal, text = "RESET", command=refresh, bg='gray')
+brefresh = cargarImagen("refresh.png")
+refresh_b = Button(ventana_principal, image = brefresh, command=refresh, bg='gray')
 refresh_b.place(x=475, y=5)
 
 
