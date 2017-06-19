@@ -247,7 +247,7 @@ tren5 = Tren(t5[0], t5[1], t5[2], t5[3], t5[4])
 #           _____________
 #__________/ Función con el numero aleatorio de pasajeros
 def random_pasajeros():
-    pasa = (random.randint(1, 1000))
+    pasa = (random.randint(1, 700))
     print("Random es: ", pasa)
     return pasa
 
@@ -275,8 +275,6 @@ contenedor_principal.place(x=0, y=0)
 user_entry = StringVar()
 demanda_variable = IntVar()
 demanda_variable.set(random_pasajeros())
-auto_var = StringVar()
-auto_var = "Vagon 1"
 bg_r = '#EB6841'
 bg_v = '#EDC951'
 
@@ -337,8 +335,8 @@ demanda_l.place(x=300, y=30)
 demanda_var = Label(consola, textvariable=demanda_variable, bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_var.place(x=520, y=30)
 
-body = 'Segun la demanda el programa selecciono los vagones ' + auto_var + ' para la siguiente salida.' \
-                        ' Si desea puede escoger los vagones de forma manual o permiterle la salida del tren asi.'
+body = 'Segun la demanda el programa seleccionara los vagones necesarios para la siguiente salida.\n' \
+                        'Si desea puede escoger los vagones de forma manual o permiterle la salida del tren asi.'
 
 message = Text(consola, height=9, width=87)
 message.insert(END, body)
@@ -358,9 +356,7 @@ def ventanaManual():
     ventana_manual.minsize(800, 500)
     ventana_manual.resizable(width=NO, height=NO)
 
-
     green_m = '#A6E22E'
-    bg_v_manual = '#272822'
     bg_entry = '#FD971F'
     bg = '#272822'
 
@@ -373,21 +369,21 @@ def ventanaManual():
     demanda = Label(fondo, textvariable=demanda_variable, fg='white', font=("Roboto Slab", 22, "bold"), bg=bg)
     demanda.place(x=540, y=20)
 
-    vagones_canvas = Canvas(ventana_manual, width=350, height=500, bg=bg_v_manual)
+    vagones_canvas = Canvas(ventana_manual, width=350, height=500, bg=bg)
     vagones_canvas.place(x=0, y=0)
 
     trenes_title = Label(vagones_canvas, text='Seleccione el tren \na modificar: ', fg='white', font=("Roboto Slab", 22, "bold")
-                          , bg=bg_v_manual)
+                          , bg=bg)
     trenes_title.place(x=50, y=5)
 
     #Botones de Opciones
-    RBTren1 = Radiobutton(vagones_canvas, text="Tren 1", variable=radio_manual, bg=bg_v_manual, fg='white',
+    RBTren1 = Radiobutton(vagones_canvas, text="Tren 1", variable=radio_manual, bg=bg, fg='white',
                           font=("Roboto Slab", 22, "bold"), value=1).place(x=25, y=100)
-    RBTren2 = Radiobutton(vagones_canvas, text="Tren 2", variable=radio_manual, bg=bg_v_manual, fg='white',
+    RBTren2 = Radiobutton(vagones_canvas, text="Tren 2", variable=radio_manual, bg=bg, fg='white',
                           font=("Roboto Slab", 22, "bold"), value=2).place(x=25, y=140)
-    RBTren3 = Radiobutton(vagones_canvas, text="Tren 3", variable=radio_manual, bg=bg_v_manual, fg='white',
+    RBTren3 = Radiobutton(vagones_canvas, text="Tren 3", variable=radio_manual, bg=bg, fg='white',
                           font=("Roboto Slab", 22, "bold"), value=3).place(x=25, y=180)
-    RBTren4 = Radiobutton(vagones_canvas, text="Tren 4", variable=radio_manual, bg=bg_v_manual, fg='white',
+    RBTren4 = Radiobutton(vagones_canvas, text="Tren 4", variable=radio_manual, bg=bg, fg='white',
                           font=("Roboto Slab", 22, "bold"), value=4).place(x=25, y=220)
 
 
@@ -405,7 +401,7 @@ def ventanaManual():
     nota.insert(END, mensage)
     nota.config(wrap=WORD)
     nota.tag_add("Body", 1.0, 99.9)
-    nota.tag_config("Body", background=bg_v_manual, foreground='white', font=("Roboto Slab", 17))
+    nota.tag_config("Body", background=bg, foreground='white', font=("Roboto Slab", 17))
     nota.config(state=DISABLED)
     nota.place(x=7, y=286)
 
@@ -1505,42 +1501,35 @@ radio = IntVar()
 def ventanaAuto():
     ventana_auto = Toplevel()
     ventana_auto.title("Modo Automatico")
-    ventana_auto.minsize(800, 500)
+    ventana_auto.minsize(350, 200)
     ventana_auto.resizable(width=NO, height=NO)
 
-    fondo = Canvas(ventana_auto, width=800, height=500, bg="white")
+    bg = '#272822'
+    w = 'white'
+
+    fondo = Canvas(ventana_auto, width=350, height=200, bg=bg)
     fondo.place(x=0, y=0)
-
-    demanda_title = Label(fondo, text='Demanda: ', fg="black", font=("Roboto Slab", 22, "bold"), bg='white')
-    demanda_title.place(x=20, y=20)
-
-    demanda = Label(fondo, textvariable=demanda_variable, fg='black', font=("Roboto Slab", 22, "bold"), bg='white')
-    demanda.place(x=80, y=80)
-
-    vagones_canvas = Canvas(ventana_auto, width=350, height=300, bg='blue')
-    vagones_canvas.place(x=0, y=200)
-
-    vagones_title = Label(vagones_canvas, text='Vagones Disponibles: ', fg='black', font=("Roboto Slab", 22, "bold"))
-    vagones_title.place(x=20, y=0)
-
-    vagones_auto = Label(vagones_canvas, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), fg='black',
-                         font=("Roboto Slab", 22, "bold"))
-    vagones_auto.place(x=20, y=60)
-
-    shell = Entry(fondo, width=17, bg='#272822', fg='white', insertwidth=10, borderwidth=3,
-                  font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
-    shell.place(x=385, y=50)
 
     """Botones de opciones"""
 
-    RBTren1 = Radiobutton(ventana_auto, text = "Tren 1", variable = radio, bg = 'white',fg='black',
-                          font=("Roboto Slab", 22, "bold"),  value = 1, command = evalua) .place(x=385, y=120)
-    RBTren2 = Radiobutton(ventana_auto, text="Tren 2", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=2,command = evalua).place(x=385, y=160)
-    RBTren3 = Radiobutton(ventana_auto, text="Tren 3", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=3, command = evalua).place(x=385, y=200)
-    RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg='white', fg='black',
-                          font=("Roboto Slab", 22, "bold"), value=4, command = evalua).place(x=385, y=240)
+    title = Label(ventana_auto, text='Seleccione un Tren\ndisponible', fg=w, bg=bg, font=("Roboto Slab", 24, "bold"))
+    title.place(x=10, y=10)
+
+    RBTren1 = Radiobutton(ventana_auto, text="Tren 1", variable=radio, bg=bg, fg=w,
+                          font=("Roboto Slab", 22, "bold"),  value=1, command=evalua)
+    RBTren1.place(x=10, y=100)
+
+    RBTren2 = Radiobutton(ventana_auto, text="Tren 2", variable=radio, bg=bg, fg=w,
+                          font=("Roboto Slab", 22, "bold"), value=2,command=evalua)
+    RBTren2.place(x=10, y=140)
+
+    RBTren3 = Radiobutton(ventana_auto, text="Tren 3", variable=radio, bg=bg, fg=w,
+                          font=("Roboto Slab", 22, "bold"), value=3, command=evalua)
+    RBTren3.place(x=170, y=100)
+
+    RBTren4 = Radiobutton(ventana_auto, text="Tren 4", variable=radio, bg=bg, fg=w,
+                          font=("Roboto Slab", 22, "bold"), value=4, command=evalua)
+    RBTren4.place(x=170, y=140)
 
 
 #Funcion que evalua los CheckButton seleccionados
@@ -1556,7 +1545,6 @@ def evalua():
         vagones_lbl.config(text=a)
         ventana_principal.update()
         verificar_vagones(tren5.vagones)
-        
         actualiza()
 
     elif r == 2 and tren2.estado == "Libre":
@@ -1595,9 +1583,13 @@ def evalua():
     else:
         messagebox.showerror("Tren no disponible", "El tren que ha seleccionado no se encuentra disponible")
 
-
 def actualiza():
     demanda_variable.set(random_pasajeros())
+
+def actualiza2():
+    a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
+    vagones_lbl.config(text=a)
+    ventana_principal.update()
 
 
 ##-----------------------------------------------------------------------##
@@ -1651,6 +1643,7 @@ def right_wg1():
         if x_tren < -200:
             break
         ventana_principal.update()
+    actualiza2()
 
 
 def right_wg2():
@@ -1665,6 +1658,7 @@ def right_wg2():
         if x_tren < -400:
             break
         ventana_principal.update()
+    actualiza2()
 
 
 def right_wg3():
@@ -1679,6 +1673,7 @@ def right_wg3():
         if x_tren < -600:
             break
         ventana_principal.update()
+    actualiza2()
 
 
 def left_wg1():
@@ -1693,6 +1688,7 @@ def left_wg1():
         if x_tren > 1650:
             break
         ventana_principal.update()
+    actualiza2()
 
 
 def left_wg2():
@@ -1707,6 +1703,7 @@ def left_wg2():
         if x_tren > 1650:
             break
         ventana_principal.update()
+    actualiza2()
 
 
 def left_wg3():
@@ -1721,14 +1718,14 @@ def left_wg3():
         if x_tren > 1650:
             break
         ventana_principal.update()
-
+    actualiza2()
 
 bgreen = cargarImagen("bgreen.png")
 manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
 manual_b.place(x=20, y=10)
 
 manual_l = Label(consola, text="Manual", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
-manual_l.place(x=60, y=220)
+manual_l.place(x=50, y=220)
 
 bblue = cargarImagen("bblue.png")
 auto_b = Button(consola, image=bblue, command=ventanaAuto, bg='gray')
