@@ -1800,7 +1800,7 @@ manual_l.place(x=1000, y=220)
 
 #Boton de RESET
 brefresh = cargarImagen("refresh.png")
-refresh_b = Button(ventana_principal, image = brefresh, command=refresh, bg='gray')
+refresh_b = Button(ventana_principal, image=brefresh, command=refresh, bg='gray')
 refresh_b.place(x=475, y=5)
 
 
