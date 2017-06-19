@@ -288,7 +288,7 @@ time_var = 7
 time = '{}:00'.format(time_var)
 
 # Se define el Label que sera el reloj
-time_clock = Label(contenedor_principal, bg='#272822', fg='red', text=time, font=("Roboto Slab", 60, "bold"))
+time_clock = Label(contenedor_principal, bg='#272822', fg='white', text=time, font=("Roboto Slab", 60, "bold"))
 time_clock.place(x=307, y=5)
 
 # Se crea un label con imagen del Irazu
