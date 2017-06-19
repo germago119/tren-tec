@@ -189,7 +189,7 @@ class Tren:
             return
 
     #                 ______________________________
-    # ________________/Funcion que ejecuta lo automatico(No terminada)
+    # ________________/Funcion que ejecuta lo automatico
     def auto(self, cantidad):  # Función para los vagones automaticos
         temp = vagon_libre(vagones_a_evaluar)
         i = 0
@@ -211,13 +211,6 @@ class Tren:
                 prueba += [temp[i].num_vagon]
                 conta += int(temp[i].capacidad_p)
                 i += 1
-
-    #def exit(self):
-        #self._del_()
-
-    #def llegar(self):
-        #Lee documento de Config
-       #self.__init__(tren, ruta, hora, maquina, vagones)
 
 
 #              _________________
