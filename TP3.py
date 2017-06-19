@@ -1349,7 +1349,7 @@ def ventanaManual():
         rm = radio_manual.get()
         if rm == 1:
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 1 \n"
-                                                                        "Los vagones utilizados por el tren son:"  + str(tren5.printL()))
+                                "Los vagones utilizados por el tren son:"  + str(tren5.printL()))
         elif rm == 2:
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 2 \n"
                                                                         "Los vagones utilizados por el tren son:" + str(
@@ -1370,39 +1370,45 @@ def ventanaManual():
     #Funcion que hace que el tren parta de la estación
     def partir_tren():
         rm = radio_manual.get()
-        if rm == 1:
+        if rm == 1 and tren5.estado == "Libre":
             if tren5.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren 1 partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren5.estado = "Ocupado"
                 verificar_vagones(tren5.vagones)
 
-        elif rm == 2:
+        elif rm == 2 and tren2.estado == "Libre":
             if tren2.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren  partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren2.estado = "Ocupado"
                 verificar_vagones(tren2.vagones)
 
-        elif rm == 3:
+        elif rm == 3 and tren3.estado == "Libre":
             if tren3.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren 3 partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren3.estado = "Ocupado"
                 verificar_vagones(tren3.vagones)
 
-        elif rm == 4:
+
+        elif rm == 4 and tren4.estado == "Libre":
             if tren4.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren 4 partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren4.estado = "Ocupado"
                 verificar_vagones(tren4.vagones)
         else:
-            messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren")
+            messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren\n"
+                                                              "O el tren seleccionado ya no se encuentra en la estación")
 
 
 
