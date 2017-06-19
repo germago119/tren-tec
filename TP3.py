@@ -1,11 +1,12 @@
+#           _____________________________
+# __________/BIBLIOTECAS
 import os
 import random
 import csv
 from tkinter import *
-from threading import Thread
 from tkinter import messagebox
 
-###############################################################################################
+###################################################################################
 """
 _________________________________________________________________________________
 |                            Tercera Tarea Progradamada                          |
@@ -27,7 +28,7 @@ for nombre, hora in m1_c:
 m1.close()
 
 
-#           _________________
+#           ________________________
 #__________/ Se define la clase Vagon
 class Vagon:
     def __init__(self, nombre=None, num_vagon=None, next=None, prev=None, capacidad_p=None, estado=None):
@@ -77,10 +78,9 @@ vagon10 = Vagon(v10[0], v10[1], None, None, v10[2], v10[3])
 vagones_a_evaluar = [vagon1, vagon2, vagon3, vagon4, vagon5, vagon6, vagon7, vagon8, vagon9, vagon10]
 ####------------------------------------#####
 
+
 #          ______________________________
 #_________/Función que realiza una lista con los vagones que se encuentran disponibles
-
-
 def vagon_libre(lista):
     vagones_libres = []
     for i in range(len(lista)):
@@ -93,7 +93,6 @@ def vagon_libre(lista):
 
 #           ___________________
 #__________/Función que Imprime el nombre y la capacidad de los vagones disponibles
-
 #Variable para que se use para printear los vagones disponibles
 def print_nombres(lista):
     nombre_disponibles = []
@@ -104,7 +103,7 @@ def print_nombres(lista):
     return nombre_disponibles
 
 
-#                ______________________
+#                ___________________________
 #_______________/Se define la clase maquina
 class Maquina:
     def __init__(self, num_maquina, capacidad_v):
@@ -112,7 +111,7 @@ class Maquina:
         self.capacidad_v = capacidad_v
 
 
-#         ______________
+#         ________________________
 #________/Se define la clase Tren
 class Tren:
     def __init__(self, tren=None, ruta=None, hora=None, num=None, estado=None):
@@ -125,6 +124,8 @@ class Tren:
         self.head = None
         self.tail = None
 
+    #         ________________________
+    # ________/Metodo que imprime una lista con valores de los vagones
     def printL(self):
         nodo = self.head
         res = "["
@@ -139,6 +140,8 @@ class Tren:
         print(res)
         return res
 
+    #         ________________________
+    # ________/Metodo que engancha un vagon al inicio
     def enganchar_i(self, num):
         self.vagones += 1
         if self.head == None and self.tail == None: #Cuando no hay vagones enganchados
@@ -148,6 +151,8 @@ class Tren:
             self.head = Vagon(num_vagon=num)
             self.tail = self.tail.next
 
+    #         ________________________
+    # ________/Metodo que engancha un vagon al final
     def enganchar_f(self, num):
         self.vagones += 1
         temp = self.tail
@@ -156,6 +161,8 @@ class Tren:
         self.tail = x
         x.prev = temp
 
+    #         ________________________
+    # ________/Metodo que engancha un vagon en el medio
     def enganchar_m(self, num):
             if self.vagones == 0:
                 return self.enganchar_i(num)
@@ -173,6 +180,8 @@ class Tren:
                     self.vagones += 1
                     break
 
+    #         ________________________
+    # ________/Metodo que libera el vagon seleccionado
     def remove(self, valor):
             temp = self.head
             if self.vagones == 0:
@@ -217,9 +226,9 @@ class Tren:
 #_____________/ Inicializa las instancias de la clase Tren
 """Lee los archivos de tren desde el archivo .csv"""
 trenes = []
-m3 = open("trenes.csv", "r")#Se lee el archivo CSV
+m3 = open("trenes.csv", "r")  # Se lee el archivo CSV
 m3_c = csv.reader(m3)
-for tren, ruta, hora, num, estado in m3_c:#Se crea una sublista con los atributos de los trenes
+for tren, ruta, hora, num, estado in m3_c:  # Se crea una sublista con los atributos de los trenes
     trenes.append([tren, ruta, hora, num, estado])
 
 
@@ -260,35 +269,40 @@ ventana_principal.title("Estacion TEC")
 ventana_principal.minsize(1560, 1000)
 ventana_principal.resizable(width=NO, height=NO)
 
-sky_blue = "#87ceeb"
+sky_blue = "#87ceeb"  # Color de fondo
 
+# se crea un Canvas donde iran las imagenes y los demas Canvas
 contenedor_principal = Canvas(ventana_principal, width=1560, height=1000, bg=sky_blue)
 contenedor_principal.place(x=0, y=0)
 
+# Se definen variables con su respectivo tipo
 user_entry = StringVar()
 demanda_variable = IntVar()
 demanda_variable.set(random_pasajeros())
+
+# Se definen colores para el fondo de los Canvas
 bg_r = '#EB6841'
 bg_v = '#EDC951'
 
+#Se define el reloj
 time_var = 7
 time = '{}:00'.format(time_var)
 
+# Se define el Label que sera el reloj
 time_clock = Label(contenedor_principal, bg='#272822', fg='red', text=time, font=("Roboto Slab", 60, "bold"))
 time_clock.place(x=307, y=5)
 
-#         __________________
-#________/Funcion que evalua el select de el automatico
-
-
+# Se crea un label con imagen del Irazu
 irazu_frame = cargarImagen('13.png')
 irazu = Label(contenedor_principal, bg=sky_blue, image=irazu_frame)
 irazu.place(x=750, y=3)
 
+# Se crea un label con imagen de la estacion del TEC
 frame_tec = cargarImagen("tec.png")
 tec = Label(contenedor_principal, bg=sky_blue, image=frame_tec)
 tec.place(x=1105, y=185)
 
+# Se crean dos labels con imagen de los rieles
 frame_rail = cargarImagen("rail.png")
 rail = Label(contenedor_principal, bg='white', image=frame_rail)
 rail.place(x=290, y=600)
@@ -296,41 +310,53 @@ rail.place(x=290, y=600)
 rail_2 = Label(contenedor_principal, bg='white', image=frame_rail)
 rail_2.place(x=1090, y=600)
 
+# Se crea un label con imagen de la Gran Area Metropolitana
 gam_frame = cargarImagen("gam.png")
 gam = Label(contenedor_principal, bg=sky_blue, image=gam_frame)
 gam.place(x=300, y=180)
 
+# Se crea un canvas para las rutas
 canvas_r = Canvas(ventana_principal, width=300, height=500, bg=bg_r)
 canvas_r.place(x=0, y=0)
 
+# Se crea un canvas para los vagones disponibles
 canvas_v = Canvas(ventana_principal, width=300, height=500, bg=bg_v)
 canvas_v.place(x=0, y=500)
 
+# Se crea un canvas para los botones del simulador
 consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
 consola.place(x=300, y=700)
 
+# Se crea un label con el titulo del Canvas de rutas
 rutas_title = Label(canvas_r, text='Rutas proximas', bg=bg_r, fg='white', font=("Roboto Slab", 24, "bold"))
 rutas_title.place(x=10, y=10)
 
+# Se crea un label con la lista de rutas extraido del csv para el Canvas de rutas
 rutas_lbl = Label(canvas_r, text="\n".join(map(str, rutas)), bg=bg_r, fg='white', font=("Roboto Slab", 21, "bold"))
 rutas_lbl.place(x=10, y=70)
 
+# Se crea un label con el titulo del Canvas de vagones
 vagones_title = Label(canvas_v, text='Vagones Disponibles', bg=bg_v, fg='white', font=("Roboto Slab", 20, "bold"))
 vagones_title.place(x=10, y=10)
 
+# Se crea un label con la lista de vagones extraido del csv para el Canvas de vagones
 vagones_lbl = Label(canvas_v, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), bg=bg_v, fg='white',
                     font=("Roboto Slab", 21, "bold"))
 vagones_lbl.place(x=10, y=70)
 
+# Se crea un label para mostrar la demanda
 demanda_l = Label(consola, text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_l.place(x=300, y=30)
 
+# Se crea un label para mostrar la demanda generada de manera aleatoria
 demanda_var = Label(consola, textvariable=demanda_variable, bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
 demanda_var.place(x=520, y=30)
 
+#Se genera el texto para el widget message
 body = 'Segun la demanda el programa seleccionara los vagones necesarios para la siguiente salida.\n' \
                         'Si desea puede escoger los vagones de forma manual o permiterle la salida del tren asi.'
 
+#Se crea el Text con el mensaje de la consola
 message = Text(consola, height=9, width=87)
 message.insert(END, body)
 message.config(wrap=WORD)
@@ -339,7 +365,7 @@ message.tag_config("Body", background='grey', foreground='white', font=("Roboto 
 message.config(state=DISABLED)
 message.place(x=270, y=110)
 
-radio_manual = IntVar()#Variable para las opciones
+radio_manual = IntVar()  # Variable para las opciones
 
 
 #        _________
@@ -350,22 +376,28 @@ def ventanaManual():
     ventana_manual.minsize(800, 500)
     ventana_manual.resizable(width=NO, height=NO)
 
+    # Variables con colores para la ventana
     green_m = '#A6E22E'
     bg_entry = '#FD971F'
     bg = '#272822'
 
+    # Se crea un canvas para el fondo de la Ventana
     fondo = Canvas(ventana_manual, width=800, height=500, bg=bg)
     fondo.place(x=0, y=0)
 
+    # Se crea un Label para la demanda
     demanda_title = Label(fondo, text='Demanda: ', fg="white", font=("Roboto Slab", 22, "bold"), bg=bg)
     demanda_title.place(x=385, y=20)
 
+    # Se crea un label para mostrar la demanda generada de manera aleatoria
     demanda = Label(fondo, textvariable=demanda_variable, fg='white', font=("Roboto Slab", 22, "bold"), bg=bg)
     demanda.place(x=540, y=20)
 
+    #Se crea un canvas para los Trenes
     vagones_canvas = Canvas(ventana_manual, width=350, height=500, bg=bg)
     vagones_canvas.place(x=0, y=0)
 
+    # Se crea un Label para mostrar la indicacion sobre trenes
     trenes_title = Label(vagones_canvas, text='Seleccione el tren \na modificar: ', fg='white',
                          font=("Roboto Slab", 22, "bold"), bg=bg)
     trenes_title.place(x=50, y=5)
@@ -380,17 +412,16 @@ def ventanaManual():
     RBTren4 = Radiobutton(vagones_canvas, text="Tren 4", variable=radio_manual, bg=bg, fg='white',
                           font=("Roboto Slab", 22, "bold"), value=4).place(x=25, y=220)
 
-
-
+    # Se crea un Entry para digitar el vagon
     shell = Entry(fondo, width=17, bg=bg_entry, fg='white', insertwidth=10, borderwidth=3,
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
     shell.place(x=385, y=70)
 
-
 #---------------------------------------------------------------------------------------------------------------------#
-
+    # Se crea el texto para el Text Widget
     mensage = "Seleccione un tren y escriba en la entrada de texto el nombre del vagon que quiere agregar.\n" \
               "La lista de vagones disponibles se encuentra en la ventana principal."
+    #Se crea un Text Widget
     nota = Text(vagones_canvas, height=30, width=42)
     nota.insert(END, mensage)
     nota.config(wrap=WORD)
@@ -871,7 +902,6 @@ def ventanaManual():
     #----------------------------------------------------------------------------------------------------------------#
 
     """Funcion que verifica el comando del boton enganchar al final"""
-
     def verifica_manual_final():
         rm = radio_manual.get()
         a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
@@ -1105,7 +1135,7 @@ def ventanaManual():
             messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible")
 
     #---------------------------------------------------------------------------------------------------------------#
-
+    """Funcion que verifica el comando de quitar vagon"""
     def quitar_vagon():
         rm = radio_manual.get()
         a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
@@ -1343,7 +1373,7 @@ def ventanaManual():
         rm = radio_manual.get()
         if rm == 1:
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 1 \n"
-                                "Los vagones utilizados por el tren son:"  + str(tren5.printL()))
+                                "Los vagones utilizados por el tren son:" + str(tren5.printL()))
         elif rm == 2:
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 2 \n"
                                                                         "Los vagones utilizados por el tren son:" + str(
@@ -1404,40 +1434,37 @@ def ventanaManual():
             messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren\n"
                                                               "O el tren seleccionado ya no se encuentra en la estación")
 
-
-
     # ----------------------------------------------------------------------------------------------------------------#
-
-
+    #        _________
+    # _______/Botones con los comandos para unir y quitar vagones de forma manual
     eng_i = Button(fondo, fg='white', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"), bg=bg,
-                   command = verifica_manual_inicio)
+                   command=verifica_manual_inicio)
     eng_i.place(x=385, y=140)
 
     eng_m = Button(fondo, fg='white', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"), bg=bg,
-                   command = verifica_manual_medio)
+                   command=verifica_manual_medio)
     eng_m.place(x=585, y=140)
 
     eng_f = Button(fondo, fg='white', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"), bg=bg,
-                   command = verifica_manual_final)
+                   command=verifica_manual_final)
     eng_f.place(x=385, y=270)
 
     quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg,
-                      command = quitar_vagon)
+                      command=quitar_vagon)
     quitar_v.place(x=585, y=270)
 
-    wagon = cargarImagen("tr_b.png")
-    train_status = Button(fondo, image=wagon, command=info_tren, bg=green_m, activebackground=bg_entry)
-    train_status.place(x=520, y=425)
-
+    #Funcion para cerrar la ventana
     def regresar():
         ventana_manual.destroy()
 
+    #Funcion de ventana auxiliar con ayuda
     def VentanaHelp():
         ventanahelp = Toplevel()
         ventanahelp.title("Help")
         ventanahelp.minsize(200, 200)
         ventanahelp.resizable(width=NO, height=NO)
 
+        #Se crea un scrollbar para el texto
         S = Scrollbar(ventanahelp)
         help_text = Text(ventanahelp, width=100, height=30)
         S.pack(side=RIGHT, fill=Y)
@@ -1445,6 +1472,7 @@ def ventanaManual():
         S.config(command=help_text.yview)
         help_text.config(yscrollcommand=S.set)
 
+        #Se crea el texto para el widget de Texto
         body = "Bienvenido a la ventana de ayuda del modo Manual.\n\nEn el cuadro de entrada de texto se " \
                "deben escribir " \
                "el nombre de alguno de los vagones disponibles que se encuntran en cuadro izquierdo y " \
@@ -1460,13 +1488,19 @@ def ventanaManual():
 
         #            ____________________________
         # __________/ Se crean tags para darle formato al contenido de la pantalla de Ayuda
-        help_text.insert(END, body)
-        help_text.config(wrap=WORD)
-        help_text.tag_add("Body", 1.0, 99.9)
-        help_text.tag_config("Body", font=("Roboto Slab", 20))
-        help_text.config(state=DISABLED)
+        help_text.insert(END, body)  # Se inserta el texto al Text
+        help_text.config(wrap=WORD)  # se justifica para que no corte las palabras
+        help_text.tag_add("Body", 1.0, 99.9)  # Se crea un tag
+        help_text.tag_config("Body", font=("Roboto Slab", 20))  # Se da formato al tag
+        help_text.config(state=DISABLED)  # Se desabilita la seleccion de texto
 
         ventanahelp.mainloop()
+    #_______________________________________________________________________________________________________________#
+    #        _________
+    # _______/Botones en el extremo inferior de la Ventana
+    wagon = cargarImagen("tr_b.png")
+    train_status = Button(fondo, image=wagon, command=info_tren, bg=green_m, activebackground=bg_entry)
+    train_status.place(x=520, y=425)
 
     imagenplay = cargarImagen("play.png")
     botonplay = Button(fondo, image=imagenplay, command=partir_tren, bg=green_m,
@@ -1484,39 +1518,38 @@ def ventanaManual():
 
     ventana_manual.mainloop()
 
-
-    #      ____________________________________________________________________
-    # _____/Funcion que veriifica al apretarse el boton de enganchar al inicio
+#Se define la variable como int
+radio = IntVar()
 
 
 #        _______________________________
 #_______/Ventana que realiza el ajuste automatico de los vagones
-radio = IntVar()
-
-
 def ventanaAuto():
     ventana_auto = Toplevel()
     ventana_auto.title("Modo Automatico")
     ventana_auto.minsize(350, 200)
     ventana_auto.resizable(width=NO, height=NO)
 
+    # Se crean variables para los colores
     bg = '#272822'
     w = 'white'
 
+    # Se crea el Canvas de fondo
     fondo = Canvas(ventana_auto, width=350, height=200, bg=bg)
     fondo.place(x=0, y=0)
 
-    """Botones de opciones"""
-
+    #Se crea un Label con texto para el titulo
     title = Label(ventana_auto, text='Seleccione un Tren\ndisponible', fg=w, bg=bg, font=("Roboto Slab", 24, "bold"))
     title.place(x=10, y=10)
 
+    """Botones de opciones"""
+
     RBTren1 = Radiobutton(ventana_auto, text="Tren 1", variable=radio, bg=bg, fg=w,
-                          font=("Roboto Slab", 22, "bold"),  value=1, command=evalua)
+                          font=("Roboto Slab", 22, "bold"), value=1, command=evalua)
     RBTren1.place(x=10, y=100)
 
     RBTren2 = Radiobutton(ventana_auto, text="Tren 2", variable=radio, bg=bg, fg=w,
-                          font=("Roboto Slab", 22, "bold"), value=2,command=evalua)
+                          font=("Roboto Slab", 22, "bold"), value=2, command=evalua)
     RBTren2.place(x=10, y=140)
 
     RBTren3 = Radiobutton(ventana_auto, text="Tren 3", variable=radio, bg=bg, fg=w,
@@ -1565,7 +1598,7 @@ def evalua():
         verificar_vagones(tren3.vagones)
         actualiza()
 
-    elif r == 4  and tren4.estado == "Libre":
+    elif r == 4 and tren4.estado == "Libre":
         tren4.auto(demanda_variable.get())
         messagebox.showinfo("Los vagones que añadieron al Tren 4 son: ",
                             str(tren4.printL() + " \nSaldra de la estación en este momento "))
@@ -1579,9 +1612,13 @@ def evalua():
     else:
         messagebox.showerror("Tren no disponible", "El tren que ha seleccionado no se encuentra disponible")
 
+
+#Funcion que actualiza la demanda
 def actualiza():
     demanda_variable.set(random_pasajeros())
 
+
+#Funcion que actualiza la lista de vagones disponibles
 def actualiza2():
     a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
     vagones_lbl.config(text=a)
@@ -1591,7 +1628,7 @@ def actualiza2():
 ##-----------------------------------------------------------------------##
 #           ____________
 #__________/Animaciones
-# Trenes
+# Frames de Trenes por cantidad de vagones y orientacion
 train_wg1_frames = [['tbk1.png', 'tbk1.1.png', 'tbk1.2.png', 'tbk1.3.png'],
                     ['tr1.png', 'tr1.1.png', 'tr1.2.png', 'tr1.3.png'],
                     ['tbl1.png', 'tbl1.1.png', 'tbl1.2.png', 'tbl1.3.png']]
@@ -1627,6 +1664,7 @@ def verificar_vagones(vagones):
         return right_wg3()
 
 
+#Animacion de salida con un vagon
 def right_wg1():
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
@@ -1642,6 +1680,7 @@ def right_wg1():
     actualiza2()
 
 
+#Animacion de salida con dos vagones
 def right_wg2():
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
@@ -1657,6 +1696,7 @@ def right_wg2():
     actualiza2()
 
 
+#Animacion de salida con tres vagones
 def right_wg3():
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
@@ -1672,6 +1712,7 @@ def right_wg3():
     actualiza2()
 
 
+#Animacion de llegada con un vagon
 def left_wg1():
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
@@ -1687,6 +1728,7 @@ def left_wg1():
     actualiza2()
 
 
+#Animacion de llegada con dos vagones
 def left_wg2():
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
@@ -1702,6 +1744,7 @@ def left_wg2():
     actualiza2()
 
 
+#Animacion de llegada con tres vagones
 def left_wg3():
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
@@ -1737,6 +1780,10 @@ def refresh():
     ventana_principal.update()
 
 
+
+#           ____________
+#__________/Botones de la consola en la Ventana Principal y su respectivo Label con su nombre
+
 bgreen = cargarImagen("bgreen.png")
 manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
 manual_b.place(x=20, y=10)
@@ -1751,9 +1798,10 @@ auto_b.place(x=1000, y=10)
 manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
 manual_l.place(x=1000, y=220)
 
-brefresh = cargarImagen("refresh.png")
+#Boton de RESET
 refresh_b = Button(ventana_principal, text = "RESET", command=refresh, bg='gray')
 refresh_b.place(x=475, y=5)
+
 
 
 ventana_principal.mainloop()
