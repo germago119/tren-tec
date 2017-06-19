@@ -1348,7 +1348,7 @@ def ventanaManual():
             ventana_principal.update()
             messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible")
 
-
+    #Mensaje que ayuda con la información de los trenes en modo manual
     def info_tren():
         rm = radio_manual.get()
         if rm == 1:
@@ -1368,6 +1368,43 @@ def ventanaManual():
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 4 \n"
                                                                         "Los vagones utilizados por el tren son:" + str(
                 tren4.printL()))
+        else:
+            messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren")
+
+    #Funcion que hace que el tren parta de la estación
+    def partir_tren():
+        rm = radio_manual.get()
+        if rm == 1:
+            if tren5.vagones == 0:
+                messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
+            else:
+                messagebox.showinfo("¡TODOS A BORDO!", "El tren 1 partira de la estación en este momento \n"
+                                                       "Buen Viaje")
+                verificar_vagones(tren5.vagones)
+
+        elif rm == 2:
+            if tren2.vagones == 0:
+                messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
+            else:
+                messagebox.showinfo("¡TODOS A BORDO!", "El tren  partira de la estación en este momento \n"
+                                                       "Buen Viaje")
+                verificar_vagones(tren2.vagones)
+
+        elif rm == 3:
+            if tren3.vagones == 0:
+                messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
+            else:
+                messagebox.showinfo("¡TODOS A BORDO!", "El tren 3 partira de la estación en este momento \n"
+                                                       "Buen Viaje")
+                verificar_vagones(tren3.vagones)
+
+        elif rm == 4:
+            if tren4.vagones == 0:
+                messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
+            else:
+                messagebox.showinfo("¡TODOS A BORDO!", "El tren 4 partira de la estación en este momento \n"
+                                                       "Buen Viaje")
+                verificar_vagones(tren4.vagones)
         else:
             messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren")
 
@@ -1432,7 +1469,7 @@ def ventanaManual():
         ventanahelp.mainloop()
 
     imagenplay = cargarImagen("play.png")
-    botonplay = Button(fondo, image=imagenplay, command=regresar, bg=green_m,
+    botonplay = Button(fondo, image=imagenplay, command=partir_tren, bg=green_m,
                          activebackground=bg_entry)
     botonplay.place(x=710, y=425)
 
