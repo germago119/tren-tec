@@ -346,10 +346,11 @@ message.tag_config("Body", background='grey', foreground='white', font=("Roboto 
 message.config(state=DISABLED)
 message.place(x=270, y=110)
 
+radio_manual = IntVar()#Variable para las opciones
+
 
 #        _________
 #_______/Ventana para ingresar los vagones manualmente
-radio_manual = IntVar()#Variable para las opciones
 def ventanaManual():
     ventana_manual = Toplevel()
     ventana_manual.title("Modo Manual")
@@ -372,8 +373,8 @@ def ventanaManual():
     vagones_canvas = Canvas(ventana_manual, width=350, height=500, bg=bg)
     vagones_canvas.place(x=0, y=0)
 
-    trenes_title = Label(vagones_canvas, text='Seleccione el tren \na modificar: ', fg='white', font=("Roboto Slab", 22, "bold")
-                          , bg=bg)
+    trenes_title = Label(vagones_canvas, text='Seleccione el tren \na modificar: ', fg='white',
+                         font=("Roboto Slab", 22, "bold"), bg=bg)
     trenes_title.place(x=50, y=5)
 
     #Botones de Opciones
@@ -393,7 +394,7 @@ def ventanaManual():
     shell.place(x=385, y=70)
 
 
-#-------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------------#
 
     mensage = "Seleccione un tren y escriba en la entrada de texto el nombre del vagon que quiere agregar.\n" \
               "La lista de vagones disponibles se encuentra en la ventana principal."
@@ -405,7 +406,7 @@ def ventanaManual():
     nota.config(state=DISABLED)
     nota.place(x=7, y=286)
 
-#-------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------------#
     """Funcion que verifica el comando del boton enganchar al inicio"""
     def verifica_manual_inicio():
         rm = radio_manual.get()
@@ -1349,7 +1350,7 @@ def ventanaManual():
         rm = radio_manual.get()
         if rm == 1:
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 1 \n"
-                                                                        "Los vagones utilizados por el tren son:"  + str(tren5.printL()))
+                                "Los vagones utilizados por el tren son:"  + str(tren5.printL()))
         elif rm == 2:
             messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 2 \n"
                                                                         "Los vagones utilizados por el tren son:" + str(
@@ -1370,55 +1371,65 @@ def ventanaManual():
     #Funcion que hace que el tren parta de la estación
     def partir_tren():
         rm = radio_manual.get()
-        if rm == 1:
+        if rm == 1 and tren5.estado == "Libre":
             if tren5.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren 1 partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren5.estado = "Ocupado"
                 verificar_vagones(tren5.vagones)
 
-        elif rm == 2:
+        elif rm == 2 and tren2.estado == "Libre":
             if tren2.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren  partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren2.estado = "Ocupado"
                 verificar_vagones(tren2.vagones)
 
-        elif rm == 3:
+        elif rm == 3 and tren3.estado == "Libre":
             if tren3.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren 3 partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren3.estado = "Ocupado"
                 verificar_vagones(tren3.vagones)
 
-        elif rm == 4:
+
+        elif rm == 4 and tren4.estado == "Libre":
             if tren4.vagones == 0:
                 messagebox.showerror("No esta autorizado", "El tren no posee vagones enganchados")
             else:
                 messagebox.showinfo("¡TODOS A BORDO!", "El tren 4 partira de la estación en este momento \n"
                                                        "Buen Viaje")
+                tren4.estado = "Ocupado"
                 verificar_vagones(tren4.vagones)
         else:
-            messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren")
+            messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren\n"
+                                                              "O el tren seleccionado ya no se encuentra en la estación")
 
 
 
     # ----------------------------------------------------------------------------------------------------------------#
 
 
-    eng_i = Button(fondo, fg='white', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"), bg=bg, command = verifica_manual_inicio)
+    eng_i = Button(fondo, fg='white', text='Enganchar\nal inicio', font=("Roboto Slab", 20, "bold"), bg=bg,
+                   command = verifica_manual_inicio)
     eng_i.place(x=385, y=140)
 
-    eng_m = Button(fondo, fg='white', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"), bg=bg, command = verifica_manual_medio)
+    eng_m = Button(fondo, fg='white', text='Enganchar\nal medio', font=("Roboto Slab", 20, "bold"), bg=bg,
+                   command = verifica_manual_medio)
     eng_m.place(x=585, y=140)
 
-    eng_f = Button(fondo, fg='white', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"), bg=bg, command = verifica_manual_final)
+    eng_f = Button(fondo, fg='white', text='Enganchar\nal final', font=("Roboto Slab", 20, "bold"), bg=bg,
+                   command = verifica_manual_final)
     eng_f.place(x=385, y=270)
 
-    quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg, command = quitar_vagon)
+    quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg,
+                      command = quitar_vagon)
     quitar_v.place(x=585, y=270)
 
     wagon = cargarImagen("tr_b.png")
@@ -1483,7 +1494,7 @@ def ventanaManual():
     ventana_manual.mainloop()
 
 
-#      _____
+    #      ____________________________________________________________________
     # _____/Funcion que veriifica al apretarse el boton de enganchar al inicio
 
 
