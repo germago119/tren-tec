@@ -1349,6 +1349,30 @@ def ventanaManual():
             messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible")
 
 
+    def info_tren():
+        rm = radio_manual.get()
+        if rm == 1:
+            messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 1 \n"
+                                                                        "Los vagones utilizados por el tren son:"  + str(tren5.printL()))
+        elif rm == 2:
+            messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 2 \n"
+                                                                        "Los vagones utilizados por el tren son:" + str(
+                tren2.printL()))
+
+        elif rm == 3:
+            messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 3 \n"
+                                                                        "Los vagones utilizados por el tren son:" + str(
+                tren3.printL()))
+
+        elif rm == 4:
+            messagebox.showinfo("Informacion sobre el tren modificado", "El tren seleccionado es el 4 \n"
+                                                                        "Los vagones utilizados por el tren son:" + str(
+                tren4.printL()))
+        else:
+            messagebox.showerror("No selecciono ningún tren", "No se ha seleccionado ningun tren")
+
+
+
     # ----------------------------------------------------------------------------------------------------------------#
 
 
@@ -1364,6 +1388,9 @@ def ventanaManual():
     quitar_v = Button(fondo, fg='white', text='Quitar\nvagon', font=("Roboto Slab", 21, "bold"), bg=bg, command = quitar_vagon)
     quitar_v.place(x=585, y=270)
 
+    wagon = cargarImagen("tr_b.png")
+    train_status = Button(fondo, image=wagon, command=info_tren, bg=green_m, activebackground=bg_entry)
+    train_status.place(x=520, y=425)
 
     def regresar():
         ventana_manual.destroy()
@@ -1419,10 +1446,6 @@ def ventanaManual():
     botonhelp.place(x=440, y=425)
 
 
-    #MAE ESTE ES EL BOTON QUE ACTIVA LA VENTANA QUE HICISTE
-    wagon = cargarImagen("tr_b.png")
-    train_status = Button(fondo, image=wagon, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
-    train_status.place(x=520, y=425)
 
     ventana_manual.mainloop()
 
@@ -1498,7 +1521,7 @@ def evalua():
 
     elif r == 2 and tren2.estado == "Libre":
         tren2.auto(demanda_variable.get())
-        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ",
+        messagebox.showinfo("Los vagones que añadieron al Tren 2 son: ",
                             str(tren2.printL() + " \nSaldra de la estación en este momento "))
         tren2.printL()
         tren2.estado = "Ocupado"
@@ -1509,7 +1532,7 @@ def evalua():
 
     elif r == 3 and tren3.estado == "Libre":
         tren3.auto(demanda_variable.get())
-        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ",
+        messagebox.showinfo("Los vagones que añadieron al Tren 3 son: ",
                             str(tren3.printL() + " \nSaldra de la estación en este momento "))
         tren3.printL()
         tren3.estado = "Ocupado"
@@ -1520,7 +1543,7 @@ def evalua():
 
     elif r == 4  and tren4.estado == "Libre":
         tren4.auto(demanda_variable.get())
-        messagebox.showinfo("Los vagones que añadieron al Tren 1 son: ",
+        messagebox.showinfo("Los vagones que añadieron al Tren 4 son: ",
                             str(tren4.printL() + " \nSaldra de la estación en este momento "))
         tren4.printL()
         tren4.estado = "Ocupado"
