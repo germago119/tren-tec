@@ -360,7 +360,7 @@ def ventanaManual():
 
 
     green_m = '#A6E22E'
-    bg_v_manual = '#AE81FF'
+    bg_v_manual = '#272822'
     bg_entry = '#FD971F'
     bg = '#272822'
 
@@ -1177,6 +1177,12 @@ def ventanaManual():
     imagenhelp = cargarImagen("help.png")
     botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
     botonhelp.place(x=440, y=425)
+
+
+    #MAE ESTE ES EL BOTON QUE ACTIVA LA VENTANA QUE HICISTE
+    wagon = cargarImagen("tr_b.png")
+    train_status = Button(fondo, image=wagon, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
+    train_status.place(x=520, y=425)
 
     ventana_manual.mainloop()
 
