@@ -1482,8 +1482,6 @@ def ventanaManual():
     botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
     botonhelp.place(x=440, y=425)
 
-
-    ventana_manual.lift()
     ventana_manual.mainloop()
 
 
@@ -1718,6 +1716,27 @@ def left_wg3():
         ventana_principal.update()
     actualiza2()
 
+
+def refresh():
+    vagon1.estado = "Libre"
+    vagon2.estado = "Libre"
+    vagon3.estado = "Libre"
+    vagon4.estado = "Libre"
+    vagon5.estado = "Libre"
+    vagon6.estado = "Libre"
+    vagon7.estado = "Libre"
+    vagon8.estado = "Libre"
+    vagon9.estado = "Libre"
+    vagon10.estado = "Libre"
+    tren5.estado = "Libre"
+    tren2.estado = "Libre"
+    tren3.estado = "Libre"
+    tren3.estado = "Libre"
+    a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
+    vagones_lbl.config(text=a)
+    ventana_principal.update()
+
+
 bgreen = cargarImagen("bgreen.png")
 manual_b = Button(consola, image=bgreen, command=ventanaManual, bg='gray')
 manual_b.place(x=20, y=10)
@@ -1731,6 +1750,10 @@ auto_b.place(x=1000, y=10)
 
 manual_l = Label(consola, text="Automatico", bg="gray", fg='white', font=("Roboto Slab", 28, "bold"))
 manual_l.place(x=1000, y=220)
+
+brefresh = cargarImagen("refresh.png")
+refresh_b = Button(ventana_principal, text = "RESET", command=refresh, bg='gray')
+refresh_b.place(x=475, y=5)
 
 
 ventana_principal.mainloop()
