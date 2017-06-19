@@ -360,7 +360,7 @@ def ventanaManual():
 
 
     green_m = '#A6E22E'
-    bg_v_manual = '#AE81FF'
+    bg_v_manual = '#272822'
     bg_entry = '#FD971F'
     bg = '#272822'
 
@@ -382,13 +382,13 @@ def ventanaManual():
 
     #Botones de Opciones
     RBTren1 = Radiobutton(vagones_canvas, text="Tren 1", variable=radio_manual, bg=bg_v_manual, fg='white',
-                          font=("Roboto Slab", 22, "bold"), value=1).place(x=25, y=120)
+                          font=("Roboto Slab", 22, "bold"), value=1).place(x=25, y=100)
     RBTren2 = Radiobutton(vagones_canvas, text="Tren 2", variable=radio_manual, bg=bg_v_manual, fg='white',
-                          font=("Roboto Slab", 22, "bold"), value=2).place(x=25, y=160)
+                          font=("Roboto Slab", 22, "bold"), value=2).place(x=25, y=140)
     RBTren3 = Radiobutton(vagones_canvas, text="Tren 3", variable=radio_manual, bg=bg_v_manual, fg='white',
-                          font=("Roboto Slab", 22, "bold"), value=3).place(x=25, y=200)
+                          font=("Roboto Slab", 22, "bold"), value=3).place(x=25, y=180)
     RBTren4 = Radiobutton(vagones_canvas, text="Tren 4", variable=radio_manual, bg=bg_v_manual, fg='white',
-                          font=("Roboto Slab", 22, "bold"), value=4).place(x=25, y=240)
+                          font=("Roboto Slab", 22, "bold"), value=4).place(x=25, y=220)
 
 
 
@@ -396,7 +396,20 @@ def ventanaManual():
                   font=("Source Code Pro", 29, "bold"), textvariable=user_entry)
     shell.place(x=385, y=70)
 
+
 #-------------------------------------------------------------------------------------------------------------------------#
+
+    mensage = "Seleccione un tren y escriba en la entrada de texto el nombre del vagon que quiere agregar.\n" \
+              "La lista de vagones disponibles se encuentra en la ventana principal."
+    nota = Text(vagones_canvas, height=30, width=42)
+    nota.insert(END, mensage)
+    nota.config(wrap=WORD)
+    nota.tag_add("Body", 1.0, 99.9)
+    nota.tag_config("Body", background=bg_v_manual, foreground='white', font=("Roboto Slab", 17))
+    nota.config(state=DISABLED)
+    nota.place(x=7, y=286)
+
+#-------------------------------------------------------------------------------------------------------------------------------#
     """Funcion que verifica el comando del boton enganchar al inicio"""
     def verifica_manual_inicio():
         rm = radio_manual.get()
@@ -628,7 +641,8 @@ def ventanaManual():
         else:
             vagones_lbl.config(text=a)
             ventana_principal.update()
-            messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible")
+            messagebox.showerror("Tren NO disponible", "El tren que ha seleccionado no esta disponible \n"
+                                                       "O no ha seleccionado ningun tren")
     #------------------------------------------------------------------------------------------------------------------#
 
     """Funcion que verifica el comando del boton enganchar al medio"""
@@ -1403,6 +1417,12 @@ def ventanaManual():
     imagenhelp = cargarImagen("help.png")
     botonhelp = Button(fondo, image=imagenhelp, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
     botonhelp.place(x=440, y=425)
+
+
+    #MAE ESTE ES EL BOTON QUE ACTIVA LA VENTANA QUE HICISTE
+    wagon = cargarImagen("tr_b.png")
+    train_status = Button(fondo, image=wagon, command=VentanaHelp, bg=green_m, activebackground=bg_entry)
+    train_status.place(x=520, y=425)
 
     ventana_manual.mainloop()
 
