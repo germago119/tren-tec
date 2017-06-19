@@ -1780,7 +1780,6 @@ def refresh():
     ventana_principal.update()
 
 
-
 #           ____________
 #__________/Botones de la consola en la Ventana Principal y su respectivo Label con su nombre
 
