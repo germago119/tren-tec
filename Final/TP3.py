@@ -670,7 +670,7 @@ def ventanaManual():
     def verifica_manual_medio():
         rm = radio_manual.get()
         a = "\n".join(map(str, print_nombres(vagones_a_evaluar)))
-        if rm == 1 and tren5.estado == "Libre":#Verifica si el tren1 se encuentra en la condicion para ser modificado y asi mismo los vagones
+        if rm == 1 and tren5.estado == "Libre":  #Verifica si el tren1 se encuentra en la condicion para ser modificado y asi mismo los vagones
             if shell.get() == "vagon1"and vagon1.estado == "Libre":
                 tren5.enganchar_m(vagon1.num_vagon)
                 vagon1.estado = "Ocupado"
