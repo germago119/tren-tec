@@ -250,7 +250,6 @@ tren5 = Tren(t5[0], t5[1], t5[2], t5[3], t5[4])
 #__________/ Función con el numero aleatorio de pasajeros
 def random_pasajeros():
     pasa = (random.randint(1, 700))
-    print("Random es: ", pasa)
     return pasa
 
 
@@ -316,12 +315,12 @@ gam = Label(contenedor_principal, bg=sky_blue, image=gam_frame)
 gam.place(x=300, y=180)
 
 # Se crea un canvas para las rutas
-canvas_r = Canvas(ventana_principal, width=300, height=500, bg=bg_r)
+canvas_r = Canvas(ventana_principal, width=300, height=550, bg=bg_r)
 canvas_r.place(x=0, y=0)
 
 # Se crea un canvas para los vagones disponibles
-canvas_v = Canvas(ventana_principal, width=300, height=500, bg=bg_v)
-canvas_v.place(x=0, y=500)
+canvas_v = Canvas(ventana_principal, width=300, height=450, bg=bg_v)
+canvas_v.place(x=0, y=550)
 
 # Se crea un canvas para los botones del simulador
 consola = Canvas(ventana_principal, width=1260, height=300, bg='gray')
@@ -342,7 +341,7 @@ vagones_title.place(x=10, y=10)
 # Se crea un label con la lista de vagones extraido del csv para el Canvas de vagones
 vagones_lbl = Label(canvas_v, text="\n".join(map(str, print_nombres(vagones_a_evaluar))), bg=bg_v, fg='white',
                     font=("Roboto Slab", 21, "bold"))
-vagones_lbl.place(x=10, y=70)
+vagones_lbl.place(x=10, y=55)
 
 # Se crea un label para mostrar la demanda
 demanda_l = Label(consola, text="Demanda: ", bg="gray", fg='white', font=("Roboto Slab", 32, "bold"))
@@ -1663,9 +1662,17 @@ def verificar_vagones(vagones):
     if vagones >= 3:
         return right_wg3()
 
+def time_up():
+    global time_var
+    time_var += 1
+    a = '{}:00'.format(time_var)
+    time_clock.config(text=a)
+    ventana_principal.update()
+
 
 #Animacion de salida con un vagon
 def right_wg1():
+    time_up()
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
     x_tren = 1600
@@ -1682,6 +1689,7 @@ def right_wg1():
 
 #Animacion de salida con dos vagones
 def right_wg2():
+    time_up()
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
     x_tren = 1620
@@ -1698,6 +1706,7 @@ def right_wg2():
 
 #Animacion de salida con tres vagones
 def right_wg3():
+    time_up()
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
     x_tren = 1620
@@ -1714,6 +1723,7 @@ def right_wg3():
 
 #Animacion de llegada con un vagon
 def left_wg1():
+    time_up()
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
     x_tren = -300
@@ -1730,6 +1740,7 @@ def left_wg1():
 
 #Animacion de llegada con dos vagones
 def left_wg2():
+    time_up()
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
     x_tren = -400
@@ -1746,6 +1757,7 @@ def left_wg2():
 
 #Animacion de llegada con tres vagones
 def left_wg3():
+    time_up()
     tren = random.randint(0, 2)
     vagon = random.randint(0, 3)
     x_tren = -630
@@ -1800,7 +1812,16 @@ manual_l.place(x=1000, y=220)
 #Boton de RESET
 brefresh = cargarImagen("refresh.png")
 refresh_b = Button(ventana_principal, image=brefresh, command=refresh, bg='gray')
-refresh_b.place(x=475, y=5)
+refresh_b.place(x=550, y=5)
+#reverse 1
+left1 = Button(ventana_principal, image=brefresh, command=left_wg1, bg='gray')
+left1.place(x=600, y=5)
+#reverse 2
+left2 = Button(ventana_principal, image=brefresh, command=left_wg2, bg='gray')
+left2.place(x=550, y=30)
+#reverse 3
+left3 = Button(ventana_principal, image=brefresh, command=left_wg3, bg='gray')
+left3.place(x=600, y=30)
 
 
 ventana_principal.mainloop()
